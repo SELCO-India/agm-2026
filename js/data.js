@@ -56,7 +56,7 @@ const imageSources = {
   // show no logo. Upload your logo file into the assets/ folder (e.g.
   // assets/logo.png) and put that path here, e.g. "assets/logo.png".
   // A Google Drive link (via driveUrl(...)) also works.
-  logo: "",
+  logo: "assets/selco logo.webp",
 
   // Optional secondary texture/photo used behind the data sections.
   // Leave blank to keep those sections purely typographic.
