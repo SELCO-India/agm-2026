@@ -142,51 +142,52 @@ const fy2627Current = {
 
 const stories = [
   {
-    title: "Story title goes here",
-    category: "Category",
-    location: "",
-    year: "",
+    title: "Swami Vivekananda Cultural Youth Centre – Swami Smaraka",
+    category: "Education",
+    location: "Krishna Vilas Rd, Subbarayanakere, Chamrajpura, Mysuru, Karnataka",
+    year: "2026",
     description:
-      "A short, concrete description of the project or story will go here — two to four lines.",
-    image: "", // driveImageUrl("FILE_ID") once available
+      "Built on the grounds of Swami Vivekananda's 1892 visit, the centre now runs on a 100 kW on-grid solar system, generating an average of 1,44,432 kWh a year and offsetting an estimated 114.10 tons of CO₂ annually.",
+    image: "", // add photo — see README.md section 6
     imageSecondary: "",
-    metric: "", // optional supporting statistic, e.g. "48 households"
-    quote: "", // optional, added later
-  },
-  {
-    title: "Story title goes here",
-    category: "Category",
-    location: "",
-    year: "",
-    description:
-      "A short, concrete description of the project or story will go here — two to four lines.",
-    image: "",
-    imageSecondary: "",
-    metric: "",
+    metric: "114.10 tons CO₂ offset per year",
     quote: "",
   },
   {
-    title: "Story title goes here",
-    category: "Category",
-    location: "",
-    year: "",
+    title: "Bade Hanuman Mandir, Haridwar",
+    category: "Institutional",
+    location:
+      "Bade Hanuman Mandir (Udupi Sri Palimaru Matha), near Bairagi Camp, Sati Ghat, Vishwakalyan, Kankhal, Haridwar, Uttarakhand",
+    year: "2026",
     description:
-      "A short, concrete description of the project or story will go here — two to four lines.",
+      "A hybrid solar system — 35 kW of panels, a 30 kW hybrid inverter and a 20 kW heat pump — now supports daily prayers and temple operations, generating an estimated 45,600 kWh a year and an average annual saving of ₹3.4–3.8 lakh on electricity.",
     image: "",
     imageSecondary: "",
-    metric: "",
+    metric: "₹3.4–3.8 lakh saved annually",
     quote: "",
   },
   {
-    title: "Story title goes here",
-    category: "Category",
-    location: "",
-    year: "",
+    title: "Axon Interconnectors & Wires Pvt. Ltd.",
+    category: "Institutional",
+    location: "Bhatramarenahalli, Hunachur, Karnataka",
+    year: "2026",
     description:
-      "A short, concrete description of the project or story will go here — two to four lines.",
+      "A 25 kW on-grid solar system now powers the kitchen and cafeteria at this Bengaluru cable-and-harness manufacturer, generating an estimated 36,500 kWh a year and reducing CO₂ emissions by an estimated 29.2 tons annually.",
     image: "",
     imageSecondary: "",
-    metric: "",
+    metric: "29.2 tons CO₂ reduced per year",
+    quote: "",
+  },
+  {
+    title: "L&T Finance",
+    category: "Livelihood",
+    location: "Chikkaballapur, Bengaluru Rural and Kolar districts, Karnataka",
+    year: "2026",
+    description:
+      "Off-grid solar systems now support six L&T Finance branches across three districts, keeping banking operations for local businesses, farmers and households running independent of grid reliability.",
+    image: "",
+    imageSecondary: "",
+    metric: "6 branches, 3 districts",
     quote: "",
   },
   {
@@ -262,34 +263,35 @@ const stories = [
     quote: "",
   },
 ];
-
+ 
 /* -------------------------------------------------------------------- *
  * 6. SECTION COPY
  * -------------------------------------------------------------------- *
  * Editorial copy, kept separate so it can be refined without touching
  * structure or numbers.
  * -------------------------------------------------------------------- */
-
+ 
 const copy = {
   org: "SELCO Solar Light Private Limited",
   eventTitle: "Annual General Meeting 2026",
-
+ 
   achievementsKicker: "A data story",
   achievementsHeading: "What we achieved in FY 2025–26",
-
+ 
   systemsIntro:
     "Behind the number are different needs, different places, and different ways of enabling energy access.",
-
+ 
   salesHeading: "FY 2025–26 — Sales",
   salesIntro:
     "The year translated into a diverse portfolio of work — from essential energy solutions to institutional, community and livelihood applications.",
-
+ 
   currentHeading: "What we have done till today",
   currentSubheading: "FY 2026–27",
   currentIntro:
     "The year is still unfolding. These figures reflect progress so far, not a final result.",
-
+ 
   storiesHeading: "Stories behind the numbers",
   storiesIntro:
     "A closer look at some of the work behind this year's figures.",
 };
+ 
