@@ -18,6 +18,11 @@
 <!-- Skip link for keyboard/screen-reader users -->
 <a class="skip-link" href="#main">Skip to content</a>
 
+<!-- Logo, top left -->
+<div class="brand-logo" id="brand-logo">
+  <img id="brand-logo-img" src="" alt="SELCO Solar Light Private Limited" />
+</div>
+
 <!-- Progress indicator -->
 <nav class="progress-rail" aria-label="Presentation progress">
   <ol class="progress-list">
@@ -65,8 +70,16 @@
       <p class="narrative-line" id="systems-intro-line"></p>
     </div>
 
-    <div class="breakdown" id="systems-breakdown" aria-label="Breakdown by category">
-      <!-- populated by app.js from fy2526Systems.categories -->
+    <div class="breakdown-layout">
+      <div class="donut-chart" id="systems-donut" aria-hidden="true">
+        <div class="donut-center">
+          <p class="donut-center-figure" id="systems-donut-total"></p>
+          <p class="donut-center-label">Total</p>
+        </div>
+      </div>
+      <div class="breakdown" id="systems-breakdown" aria-label="Breakdown by category">
+        <!-- populated by app.js from fy2526Systems.categories -->
+      </div>
     </div>
 
   </section>
@@ -90,8 +103,16 @@
       <p class="narrative-line" id="sales-intro-line"></p>
     </div>
 
-    <div class="breakdown breakdown--ranked" id="sales-breakdown" aria-label="Sales by category, ranked">
-      <!-- populated by app.js from fy2526Sales.categories -->
+    <div class="breakdown-layout">
+      <div class="donut-chart" id="sales-donut" aria-hidden="true">
+        <div class="donut-center">
+          <p class="donut-center-figure" id="sales-donut-total"></p>
+          <p class="donut-center-label">Total sales</p>
+        </div>
+      </div>
+      <div class="breakdown breakdown--ranked" id="sales-breakdown" aria-label="Sales by category, ranked">
+        <!-- populated by app.js from fy2526Sales.categories -->
+      </div>
     </div>
 
   </section>
