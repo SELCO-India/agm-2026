@@ -12,6 +12,13 @@
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Muted greens/golds only — stays inside the existing brand palette
+  // rather than introducing new hues just for the charts.
+  var CHART_PALETTE = [
+    "#4F6B47", "#B37E2E", "#8CA67F", "#8A5A22",
+    "#6C8A62", "#D9B47E", "#37492F", "#C79A5B", "#A9C49A"
+  ];
+
   /* ===================================================================
    * UTILITIES
    * =================================================================== */
@@ -29,6 +36,26 @@
     if (n >= 10000000) return "₹" + (n / 10000000).toFixed(2) + " Cr";
     if (n >= 100000) return "₹" + (n / 100000).toFixed(1) + " L";
     return "₹" + formatInt(n);
+  }
+
+  /**
+   * Renders a donut chart into `container` using conic-gradient — no
+   * canvas/SVG/library needed. `categories` is an array of {name, value}
+   * IN THE SAME ORDER used for that section's bars, so colours line up.
+   */
+  function buildDonutChart(container, centerEl, categories, centerDisplay) {
+    if (!container) return;
+    var total = categories.reduce(function (sum, c) { return sum + c.value; }, 0);
+    var cumulative = 0;
+    var stops = categories.map(function (cat, i) {
+      var startPct = (cumulative / total) * 100;
+      cumulative += cat.value;
+      var endPct = (cumulative / total) * 100;
+      var color = CHART_PALETTE[i % CHART_PALETTE.length];
+      return color + " " + startPct.toFixed(2) + "% " + endPct.toFixed(2) + "%";
+    });
+    container.style.background = "conic-gradient(" + stops.join(", ") + ")";
+    if (centerEl) centerEl.textContent = centerDisplay;
   }
 
   function easeOutExpo(t) {
@@ -109,9 +136,14 @@
       fy2526Systems.categories.map(function (c) { return c.value; })
     );
     fy2526Systems.categories.forEach(function (cat, i) {
-      var row = buildBreakdownRow(cat.name, cat.value, maxValue, false, i);
+      var color = CHART_PALETTE[i % CHART_PALETTE.length];
+      var row = buildBreakdownRow(cat.name, cat.value, maxValue, false, i, color);
       breakdownEl.appendChild(row);
     });
+
+    var donutEl = document.getElementById("systems-donut");
+    var donutTotalEl = document.getElementById("systems-donut-total");
+    buildDonutChart(donutEl, donutTotalEl, fy2526Systems.categories, formatInt(fy2526Systems.total));
 
     var hasRun = false;
     var observer = new IntersectionObserver(
@@ -122,6 +154,7 @@
             animateNumber(fy2526Systems.total, 2200, function (v) {
               counterEl.textContent = formatInt(v);
             });
+            if (donutEl) donutEl.classList.add("is-visible");
             observer.unobserve(entry.target);
           }
         });
@@ -155,9 +188,14 @@
     var maxValue = sorted[0].value;
 
     sorted.forEach(function (cat, i) {
-      var row = buildBreakdownRow(cat.name, cat.value, maxValue, true, i);
+      var color = CHART_PALETTE[i % CHART_PALETTE.length];
+      var row = buildBreakdownRow(cat.name, cat.value, maxValue, true, i, color);
       breakdownEl.appendChild(row);
     });
+
+    var donutEl = document.getElementById("sales-donut");
+    var donutTotalEl = document.getElementById("sales-donut-total");
+    buildDonutChart(donutEl, donutTotalEl, sorted, formatCroreDisplay(fy2526Sales.totalExact));
 
     var hasRun = false;
     var observer = new IntersectionObserver(
@@ -168,6 +206,7 @@
             animateNumber(fy2526Sales.totalExact, 2200, function (v) {
               counterEl.textContent = formatCroreDisplay(v);
             });
+            if (donutEl) donutEl.classList.add("is-visible");
             observer.unobserve(entry.target);
           }
         });
@@ -179,14 +218,22 @@
     initBreakdownReveal(breakdownEl, true);
   }
 
-  function buildBreakdownRow(name, value, maxValue, isCurrency, index) {
+  function buildBreakdownRow(name, value, maxValue, isCurrency, index, color) {
     var row = document.createElement("div");
     row.className = "breakdown-row";
     row.style.transitionDelay = prefersReducedMotion ? "0ms" : (index * 70) + "ms";
 
     var label = document.createElement("p");
     label.className = "breakdown-label";
-    label.textContent = name;
+    if (color) {
+      var swatch = document.createElement("span");
+      swatch.className = "breakdown-swatch";
+      swatch.style.background = color;
+      label.appendChild(swatch);
+    }
+    var labelText = document.createElement("span");
+    labelText.textContent = name;
+    label.appendChild(labelText);
 
     var track = document.createElement("div");
     track.className = "breakdown-bar-track";
@@ -562,12 +609,21 @@
     }
   }
 
+  function initBrandLogo() {
+    var img = document.getElementById("brand-logo-img");
+    if (!img || typeof imageSources === "undefined" || !imageSources.logo) return;
+    img.addEventListener("load", function () { img.classList.add("is-loaded"); });
+    img.addEventListener("error", function () { img.classList.remove("is-loaded"); });
+    img.src = imageSources.logo;
+  }
+
   /* ===================================================================
    * INIT
    * =================================================================== */
 
   document.addEventListener("DOMContentLoaded", function () {
     initHeroMedia();
+    initBrandLogo();
     initSystemsSection();
     initSalesSection();
     initCurrentSection();
