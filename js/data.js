@@ -45,10 +45,18 @@ function driveImageUrl(fileId) {
 }
 
 const imageSources = {
-  // Opening hero background. Suggested: wide rural/farmland landscape
-  // with solar visible, warm evening light. Leave blank for the default
-  // soft gradient treatment.
-  hero: "",
+  // Opening hero background. A free, no-watermark stock photo (golden-hour
+  // wheat field, Uttarakhand, India — via Pexels, free to use) is set here
+  // as a placeholder so the opening section isn't blank. Replace with your
+  // own photo (a Drive link or a path like "assets/hero.jpg") any time —
+  // see README.md, section 6.
+  hero: "https://images.pexels.com/photos/7385132/pexels-photo-7385132.jpeg?auto=compress&cs=tinysrgb&w=1920",
+
+  // SELCO logo, shown fixed top-left across the whole site. Leave blank to
+  // show no logo. Upload your logo file into the assets/ folder (e.g.
+  // assets/logo.png) and put that path here, e.g. "assets/logo.png".
+  // A Google Drive link (via driveUrl(...)) also works.
+  logo: "",
 
   // Optional secondary texture/photo used behind the data sections.
   // Leave blank to keep those sections purely typographic.
@@ -125,6 +133,11 @@ const fy2627Current = {
  * order listed. To add a story, add an object to this array — no HTML
  * editing required. Leave fields as empty strings ("") if not yet
  * available; the layout adapts gracefully to missing image/metric/etc.
+ *
+ * PHOTOS: the `image` field accepts either
+ *   - a path to a photo you've uploaded straight into this repo, e.g.
+ *     "assets/stories/story01.jpg" (simplest — see README.md, section 6), or
+ *   - a Google Drive share link, wrapped as driveUrl("https://drive.google.com/...")
  * -------------------------------------------------------------------- */
 
 const stories = [
