@@ -616,6 +616,15 @@
     }
   }
 
+
+  function initIntroSplash() {
+  var splash = document.getElementById("intro-splash");
+  if (!splash) return;
+  if (prefersReducedMotion) { splash.remove(); return; }
+  setTimeout(function () { splash.remove(); }, 2600);
+}
+
+  
   function initBrandLogo() {
     var img = document.getElementById("brand-logo-img");
     if (!img || typeof imageSources === "undefined" || !imageSources.logo) return;
