@@ -638,6 +638,7 @@
    * =================================================================== */
 
   document.addEventListener("DOMContentLoaded", function () {
+    initIntroSplash();
     initHeroMedia();
     initBrandLogo();
     initSystemsSection();
