@@ -52,7 +52,7 @@ const imageSources = {
   // see README.md, section 6. The dark gradient overlay is designed for a
   // landscape photo like this — very light/white photos will look washed
   // out under it.
-  hero: "https://images.pexels.com/photos/6876536/pexels-photo-6876536.jpeg?auto=compress&cs=tinysrgb&w=1920",
+  hero: "assets/Banner.png",
 
   // SELCO logo, shown fixed top-left across the whole site. Leave blank to
   // show no logo. Upload your logo file into the assets/ folder (e.g.
