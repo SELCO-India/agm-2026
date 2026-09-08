@@ -360,7 +360,7 @@
    * =================================================================== */
 
   var StoryController = (function () {
-    var viewport, track, dotsEl, currentEl, totalEl, section;
+    var viewport, track, dotsEl, currentEl, totalEl, section, prevBtn, nextBtn;
     var current = 0;
     var total = 0;
     var isActive = false; // true when the section owns wheel/keyboard input
@@ -372,6 +372,8 @@
       currentEl = document.getElementById("story-current");
       totalEl = document.getElementById("story-total");
       section = document.getElementById("section-stories");
+      prevBtn = document.getElementById("story-arrow-prev");
+      nextBtn = document.getElementById("story-arrow-next");
 
       if (!track || typeof stories === "undefined") return;
 
@@ -390,6 +392,9 @@
       });
 
       updateUI();
+
+      if (prevBtn) prevBtn.addEventListener("click", function () { prev(); });
+      if (nextBtn) nextBtn.addEventListener("click", function () { next(); });
 
       viewport.addEventListener("wheel", onWheel, { passive: false });
       viewport.addEventListener("keydown", onKeydown);
@@ -496,6 +501,8 @@
       currentEl.textContent = String(current + 1).padStart(2, "0");
       var dots = dotsEl.querySelectorAll(".story-dot");
       dots.forEach(function (d, i) { d.classList.toggle("is-active", i === current); });
+      if (prevBtn) prevBtn.disabled = current === 0;
+      if (nextBtn) nextBtn.disabled = current === total - 1;
     }
 
     function goTo(index) {
@@ -540,7 +547,7 @@
 
     function setActive(val) { isActive = val; }
 
-    return { build: build, setActive: setActive };
+    return { build: build, setActive: setActive, next: next, prev: prev };
   })();
 
   function initStoriesActivation() {
