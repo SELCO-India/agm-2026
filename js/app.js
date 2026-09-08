@@ -594,7 +594,7 @@
             items.forEach(function (item, i) {
               item.classList.toggle("is-active", i === idx);
             });
-            currentLabel.textContent = String(idx + 1).padStart(2, "0");
+            if (currentLabel) currentLabel.textContent = String(idx + 1).padStart(2, "0");
           }
         });
       },
