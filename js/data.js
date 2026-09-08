@@ -43,14 +43,16 @@ function driveImageUrl(fileId) {
   if (!fileId) return "";
   return `https://lh3.googleusercontent.com/d/${fileId}`;
 }
-
+ 
 const imageSources = {
-  // Opening hero background. A free, no-watermark stock photo (golden-hour
-  // wheat field, Uttarakhand, India — via Pexels, free to use) is set here
+  // Opening hero background. A free, no-watermark stock photo (solar
+  // panels across a green field — via Pexels, free to use) is set here
   // as a placeholder so the opening section isn't blank. Replace with your
   // own photo (a Drive link or a path like "assets/hero.jpg") any time —
-  // see README.md, section 6.
-  hero: "https://images.pexels.com/photos/7385132/pexels-photo-7385132.jpeg?auto=compress&cs=tinysrgb&w=1920",
+  // see README.md, section 6. The dark gradient overlay is designed for a
+  // landscape photo like this — very light/white photos will look washed
+  // out under it.
+  hero: "https://images.pexels.com/photos/6876536/pexels-photo-6876536.jpeg?auto=compress&cs=tinysrgb&w=1920",
 
   // SELCO logo, shown fixed top-left across the whole site. Leave blank to
   // show no logo. Upload your logo file into the assets/ folder (e.g.
