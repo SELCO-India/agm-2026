@@ -322,4 +322,22 @@ const copy = {
   storiesIntro:
     "A closer look at some of the work behind this year's figures.",
 };
+
+const financialsSummary = {
+  period: "Apr–Aug 2026",
+  incomeExpenditure: [
+    { label: "Sales Revenue", value: 200720207 },
+    { label: "Service Revenue", value: 8020347 },
+    { label: "Total Direct Income", value: 208740554, emphasis: true },
+    { label: "COGS", value: 136485609 },
+    { label: "COGS (% of Sales)", value: "68.00%", isText: true },
+    { label: "Profit (as per financials)", value: 3198718, emphasis: true },
+  ],
+  debtors: { asOf: "Aug 2026", value: 67624709 },
+  trends: [
+    { name: "Fixed Cost", currentValue: 47855998, previousLabel: "Apr–Aug 2025", previousValue: 83453849, changePct: -42.66 },
+    { name: "Fixed Deposits", currentValue: 250748813, previousLabel: "As on Aug 2025", previousValue: 222674883, changePct: 12.61 },
+    { name: "Cash & Bank", currentValue: 10156957, previousLabel: "As on Aug 2025", previousValue: 21512417, changePct: -52.79 },
+  ],
+};
  
