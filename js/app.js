@@ -323,6 +323,9 @@
 
     renderBifurcation("sales-bifurcation-body", fy2627Current.salesBifurcation, formatRupeeShort);
     renderBifurcation("systems-bifurcation-body", fy2627Current.systemsBifurcation, formatInt);
+    function formatKwp(n) {
+  return n.toLocaleString("en-IN", { maximumFractionDigits: 1 }) + " kWp";
+}
   }
 
   function renderBifurcation(containerId, dataArr, formatter) {
