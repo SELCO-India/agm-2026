@@ -122,11 +122,37 @@ const fy2627Current = {
   systemsDisplay: "3K",
   asOfLabel: "So far this year",
 
-  // Fill these in later, e.g.:
-  // salesBifurcation: [{ name: "Institutional", value: 12000000 }, ...]
-  salesBifurcation: [],
-  systemsBifurcation: [],
+  salesBifurcation: [
+    { name: "Basic Energy – Small", value: 4963402.92 },
+    { name: "Basic Energy – Medium", value: 68661955.42 },
+    { name: "Institutional", value: 35193249.36 },
+    { name: "Community", value: 24568783.01 },
+    { name: "Education", value: 2255204.43 },
+    { name: "Livelihood", value: 12938844.08 },
+    { name: "Water Heater", value: 15418080.93 },
+  ],
+  systemsBifurcation: [
+    { name: "Basic Energy – Small", value: 177 },
+    { name: "Basic Energy – Medium", value: 615 },
+    { name: "Institutional", value: 150 },
+    { name: "Community", value: 1440 },
+    { name: "Education", value: 41 },
+    { name: "Livelihood", value: 75 },
+    { name: "Water Heater", value: 518 },
+  ],
+  // Water Heater has no kWp figure in the source data ("—"), so it's
+  // left out here rather than shown as a fabricated 0.
+  capacityBifurcation: [
+    { name: "Basic Energy – Small", value: 23.1 },
+    { name: "Basic Energy – Medium", value: 984.0 },
+    { name: "Institutional", value: 556.7 },
+    { name: "Community", value: 127.6 },
+    { name: "Education", value: 7.4 },
+    { name: "Livelihood", value: 69.6 },
+  ],
 };
+
+
 
 /* -------------------------------------------------------------------- *
  * 5. STORIES BEHIND THE NUMBERS
