@@ -255,41 +255,29 @@ const stories = [
     quote: "",
   },
   {
-    title: "Story title goes here",
-    category: "Category",
-    location: "",
-    year: "",
-    description:
-      "A short, concrete description of the project or story will go here — two to four lines.",
-    image: "",
-    imageSecondary: "",
-    metric: "",
-    quote: "",
-  },
-  {
-    title: "Story title goes here",
-    category: "Category",
-    location: "",
-    year: "",
-    description:
-      "A short, concrete description of the project or story will go here — two to four lines.",
-    image: "",
-    imageSecondary: "",
-    metric: "",
-    quote: "",
-  },
-  {
-    title: "Story title goes here",
-    category: "Category",
-    location: "",
-    year: "",
-    description:
-      "A short, concrete description of the project or story will go here — two to four lines.",
-    image: "",
-    imageSecondary: "",
-    metric: "",
-    quote: "",
-  },
+  title: "When Light Came Home, Gosaladoddi",
+  category: "Community",
+  location: "Gosaladoddi, Koppal taluk, Koppal district, Karnataka",
+  year: "2026",
+  description:
+    "Solar lighting reached nearly 100 households in Gosaladoddi, extending study and work hours after sunset. The shift also opened a path to income \u2014 five women pursued PMFME-backed loans for solar-powered livelihood machines, and the first, a roti-making unit, is now producing 800\u20131,000 rotis a day.",
+  image: "",
+  imageSecondary: "",
+  metric: "~100 households lit; 800\u20131,000 rotis/day from the first unit",
+  quote: "",
+},
+{
+  title: "Making 8 kW Single-Phase Solar Work, Chitradurga",
+  category: "Institutional",
+  location: "Chitradurga, Karnataka",
+  year: "2026",
+  description:
+    "A dental clinic's existing 3 kWp solar setup was expanded into an 8 kWp single-phase hybrid system with 10 kWh of lithium battery storage, configured for zero grid export. Solar covers the clinic's loads first, the battery fills the gaps, and the grid steps in only when needed \u2014 engineered around a 3 kW sanctioned load per meter.",
+  image: "",
+  imageSecondary: "",
+  metric: "8 kWp hybrid + 10 kWh lithium, \u20b97.25 lakh",
+  quote: "",
+},
 ];
  
 /* -------------------------------------------------------------------- *
