@@ -361,6 +361,69 @@
     el.appendChild(list);
   }
 
+  function renderLineItems(containerId, items) {
+  var el = document.getElementById(containerId);
+  if (!el || !items || !items.length) return;
+  el.classList.add("has-data");
+  el.innerHTML = "";
+  items.forEach(function (item) {
+    var row = document.createElement("div");
+    row.style.display = "flex";
+    row.style.justifyContent = "space-between";
+    row.style.padding = "6px 0";
+    row.style.fontSize = item.emphasis ? "14px" : "13px";
+    row.style.fontWeight = item.emphasis ? "600" : "400";
+    row.style.fontFamily = "var(--font-body)";
+    row.style.color = item.emphasis ? "var(--ink)" : "var(--ink-70)";
+    var label = document.createElement("span");
+    label.textContent = item.label;
+    var val = document.createElement("span");
+    val.textContent = item.isText ? item.value : formatRupeeShort(item.value);
+    row.appendChild(label);
+    row.appendChild(val);
+    el.appendChild(row);
+  });
+}
+
+function initFinancialsSection() {
+  if (typeof financialsSummary === "undefined") return;
+
+  var periodEl = document.getElementById("financials-period");
+  if (periodEl) periodEl.textContent = financialsSummary.period;
+
+  renderLineItems("income-expenditure-body", financialsSummary.incomeExpenditure);
+
+  var debtorsEl = document.getElementById("debtors-body");
+  if (debtorsEl && financialsSummary.debtors) {
+    debtorsEl.classList.add("has-data");
+    debtorsEl.innerHTML =
+      '<div><p style="font-family:var(--font-display); font-size:clamp(22px,2.6vw,30px); color:var(--ink);">' +
+      formatRupeeShort(financialsSummary.debtors.value) +
+      '</p><p style="font-size:12px; color:var(--ink-45); margin-top:4px;">As on ' +
+      financialsSummary.debtors.asOf + "</p></div>";
+  }
+
+  var trendsWrap = document.getElementById("financial-trends-list");
+  if (trendsWrap && financialsSummary.trends) {
+    trendsWrap.innerHTML = "";
+    financialsSummary.trends.forEach(function (t) {
+      var isUp = t.changePct >= 0;
+      var row = document.createElement("div");
+      row.className = "trend-row";
+      row.innerHTML =
+        '<p class="trend-name">' + t.name + "</p>" +
+        '<div class="trend-figures">' +
+        '<p class="trend-current">' + formatRupeeShort(t.currentValue) + "</p>" +
+        '<p class="trend-previous">' + t.previousLabel + ": " + formatRupeeShort(t.previousValue) + "</p>" +
+        "</div>" +
+        '<p class="trend-delta ' + (isUp ? "is-up" : "is-down") + '">' +
+        (isUp ? "▲ " : "▼ ") + Math.abs(t.changePct).toFixed(2) + "%</p>";
+      trendsWrap.appendChild(row);
+    });
+  }
+}
+  
+
   /* ===================================================================
    * SECTION 05 — STORIES (horizontal scroll within vertical page)
    * =================================================================== */
@@ -650,6 +713,7 @@
     initSystemsSection();
     initSalesSection();
     initCurrentSection();
+    initFinancialsSection(); 
     StoryController.build();
     initStoriesActivation();
     initRevealObserver();
