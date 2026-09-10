@@ -1068,6 +1068,44 @@ button { font: inherit; }
     grid-template-columns: 1fr;
     gap: 8px;
   }
+   .plan-panel {
+  padding-left: 52px;
+  padding-right: 52px;
+}
+
+.plan-theme {
+  font-size: 30px;
+}
+
+.plan-stats {
+  gap: 24px;
+}
+
+.plan-action {
+  font-size: 13px;
+}
   .breakdown-value { text-align: left; }
   .milestones { gap: 36px; }
+}
+
+@media (max-width: 760px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #section-future .story-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .plan-panel {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 }
