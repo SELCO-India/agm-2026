@@ -322,6 +322,8 @@
   if (!el || !items || !items.length) return;
   el.classList.add("has-data");
   el.innerHTML = "";
+  var list = document.createElement("div");
+  list.style.width = "100%";
   items.forEach(function (item) {
     var row = document.createElement("div");
     row.style.display = "flex";
@@ -337,8 +339,9 @@
     val.textContent = item.isText ? item.value : formatRupeeShort(item.value);
     row.appendChild(label);
     row.appendChild(val);
-    el.appendChild(row);
+    list.appendChild(row);
   });
+  el.appendChild(list);
 }
 function initFinancialsSection() {
   if (typeof financialsSummary === "undefined") return;
@@ -745,8 +748,19 @@ function initFinancialsSection() {
     var media = document.getElementById("hero-media");
     if (!media || typeof imageSources === "undefined") return;
     if (imageSources.hero) {
-      media.style.setProperty("--hero-image-url", "url('" + imageSources.hero + "')");
-      media.classList.add("has-image");
+      var img = new Image();
+      img.onload = function () {
+        media.style.backgroundImage =
+          "linear-gradient(180deg, rgba(14,11,7,0.10) 0%, rgba(10,8,5,0.48) 55%, rgba(6,5,3,0.94) 100%), url('" +
+          imageSources.hero + "')";
+        media.classList.add("has-image");
+      };
+      img.onerror = function () {
+        // Photo failed to load (bad path/case, or not committed yet) —
+        // keep the dark gradient fallback rather than showing nothing.
+        console.warn("Hero image failed to load:", imageSources.hero);
+      };
+      img.src = imageSources.hero;
     }
   }
   function initIntroSplash() {
