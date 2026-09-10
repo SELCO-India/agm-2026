@@ -110,15 +110,18 @@ const fy2627Current = {
   totalSalesExact: 208700000, // approximate — replace with exact figure when available
   systemsDisplay: "3K",
   asOfLabel: "So far this year",
-  salesBifurcation: [
-    { name: "Basic Energy – Small", value: 4963402.92 },
-    { name: "Basic Energy – Medium", value: 68661955.42 },
-    { name: "Institutional", value: 35193249.36 },
-    { name: "Community", value: 24568783.01 },
-    { name: "Education", value: 2255204.43 },
-    { name: "Livelihood", value: 12938844.08 },
-    { name: "Water Heater", value: 15418080.93 },
-  ],
+  const salesBifurcation = [
+  { label: "Basic Energy Small", value: "₹57.78 L" },
+  { label: "Basic Energy Medium", value: "₹7.99 Cr" },
+  { label: "Institutional", value: "₹4.10 Cr" },
+  { label: "Water Heater", value: "₹1.53 Cr" },
+  { label: "Community", value: "₹2.67 Cr" },
+  { label: "Livelihood", value: "₹1.79 Cr" },
+  { label: "Education", value: "₹22.55 L" },
+  { label: "AMC", value: "₹4.52 L" },
+  { label: "Spare", value: "₹63.85 L" },
+  { label: "Service Bill", value: "₹1.17 Cr" }
+];
   systemsBifurcation: [
     { name: "Basic Energy – Small", value: 177 },
     { name: "Basic Energy – Medium", value: 615 },
