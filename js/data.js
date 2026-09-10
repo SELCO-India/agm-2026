@@ -2,11 +2,6 @@
  * AGM 2026 — DATA
  */
 
-function driveImageUrl(fileId) {
-  if (!fileId) return "";
-  return `https://lh3.googleusercontent.com/d/${fileId}`;
-}
-
 const imageSources = {
   hero: "assets/Banner.png",
   logo: "assets/SELCO.png",
@@ -209,7 +204,7 @@ const financialsSummary = {
   trends: [
     { name: "Fixed Cost", currentValue: 47855998, previousLabel: "Apr–Aug 2025", previousValue: 83453849, changePct: -42.66 },
     { name: "Fixed Deposits", currentValue: 250748813, previousLabel: "As on Aug 2025", previousValue: 222674883, changePct: 12.61 },
-    { name: "Cash & Bank", currentValue: 10156957, previousLabel: "As on Aug 2025", previousValue: 21512417, changePct: -52.79 },
+    { name: "Liquid Investments", currentValue: 10156957, previousLabel: "As on Aug 2025", previousValue: 21512417, changePct: -52.79 },
   ],
 };
 
