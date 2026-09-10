@@ -164,7 +164,7 @@ const stories = [
     description:
       "Built on the grounds of Swami Vivekananda's 1892 visit, the centre now runs on a 100 kW on-grid solar system, generating an average of 1,44,432 kWh a year and offsetting an estimated 114.10 tons of CO₂ annually.",
     image: "assets/Vivekananada.png", // add photo — see README.md section 6
-    imageSecondary: "",
+    imageSecondary: "assets/Vivekananada.png",
     metric: "114.10 tons CO₂ offset per year",
     quote: "",
   },
@@ -177,7 +177,7 @@ const stories = [
     description:
       "A hybrid solar system — 35 kW of panels, a 30 kW hybrid inverter and a 20 kW heat pump — now supports daily prayers and temple operations, generating an estimated 45,600 kWh a year and an average annual saving of ₹3.4–3.8 lakh on electricity.",
     image: "assets/Bade hanuman.png",
-    imageSecondary: "",
+    imageSecondary: "assets/Bade hanuman.png",
     metric: "₹3.4–3.8 lakh saved annually",
     quote: "",
   },
@@ -200,8 +200,8 @@ const stories = [
     year: "2026",
     description:
       "Off-grid solar systems now support six L&T Finance branches across three districts, keeping banking operations for local businesses, farmers and households running independent of grid reliability.",
-    image: "",
-    imageSecondary: "",
+    image: "assets/LT bank.png",
+    imageSecondary: "assets/LT bank.png",
     metric: "6 branches, 3 districts",
     quote: "",
   },
