@@ -212,8 +212,8 @@ const stories = [
     year: "2026",
     description:
       "At \u201cHalli Mane,\u201d a farm shed spanning over an acre in Amasebail, wild animals and night-time theft threatened crops like coconut and areca nut. SELCO installed solar-powered lights around the farm belonging to Dr. Ashok Kumar Kodgi, deterring animals and intruders and letting him move safely around the land after dark \u2014 with no electricity bill attached.",
-    image: "",
-    imageSecondary: "",
+    image: "assets/Amasebail.png",
+    imageSecondary: "assets/Amasebail.png",
     metric: "Round-the-clock farm security, fully off-grid",
     quote: "",
   },
@@ -224,8 +224,8 @@ const stories = [
     year: "2026",
     description:
       "Building on its earlier SELCO solar-powered smart classroom system, Government High School Manchi\u2013Kolnad added a 6 kW solar off-grid system on 31 July 2026, funded through the MRPL CSR Fund at a cost of \u20b94,90,000. Computers, lights and fans now keep running through power outages, and the school's electricity bills have dropped.",
-    image: "",
-    imageSecondary: "",
+    image: "assets/school.png",
+    imageSecondary: "assets/school.png",
     metric: "6 kW system, funded via MRPL CSR",
     quote: "",
   },
@@ -236,8 +236,8 @@ const stories = [
     year: "2026",
     description:
       "After years in Bengaluru's IT industry, Raghavendra Mudradi returned to his village near Karkala to take up farming and animal husbandry. Frequent power cuts stood in the way \u2014 a SELCO solar-hybrid system solved that, keeping the farm running and letting his wife work from home right there in the village.",
-    image: "",
-    imageSecondary: "",
+    image: "assets/IT.png",
+    imageSecondary: "assets/IT.png",
     metric: "",
     quote: "",
   },
