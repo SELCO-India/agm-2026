@@ -647,14 +647,19 @@ button { font: inherit; }
    FUTURE PLANS — MONTH CARDS + SALES TABLE
 --------------------------------------------------------------------- */
 .plan-panel {
-  flex: 0 0 100vw;
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: none;
   min-height: 58vh;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 var(--gutter);
-  max-width: 760px;
-  margin: 0 auto;
+  align-items: stretch;
+
+  padding: 24px clamp(72px, 10vw, 140px);
+  margin: 0;
 }
 .plan-month-label {
   font-family: var(--font-body);
