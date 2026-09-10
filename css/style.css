@@ -727,7 +727,7 @@ button { font: inherit; }
 }
 .plan-action {
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.45;
   color: var(--ink-70);
   padding-left: 18px;
   position: relative;
