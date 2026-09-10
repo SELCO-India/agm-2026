@@ -1,7 +1,6 @@
 /* =====================================================================
    AGM 2026 — DESIGN SYSTEM
    SELCO Solar Light Private Limited
-
    Palette
    -------
    --paper   #FAF8F2   warm paper background
@@ -12,13 +11,11 @@
    --green   #4F6B47   natural, muted foliage green
    --gold    #C08A34   muted solar gold accent
    --line    hairline rule color
-
    Type
    ----
    Display: "Fraunces" (serif, optical sizing) — numbers & headlines
    Body:    "Inter"                              — everything else
    ===================================================================== */
-
 :root {
   --paper: #FAF8F2;
   --panel: #F1ECDF;
@@ -32,20 +29,15 @@
   --gold-soft: rgba(179, 126, 46, 0.16);
   --red-orange: #D9531E;
   --line: rgba(35, 41, 32, 0.12);
-
   --font-display: "Fraunces", "Iowan Old Style", serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-
   --measure: 640px;
   --gutter: clamp(24px, 6vw, 96px);
-
   --ease-editorial: cubic-bezier(0.19, 1, 0.22, 1);
   --dur-slow: 1100ms;
   --dur-med: 650ms;
   --dur-fast: 350ms;
 }
-
-
 /* ---------------------------------------------------------------------
    INTRO SPLASH
 --------------------------------------------------------------------- */
@@ -78,7 +70,6 @@
 @media (prefers-reduced-motion: reduce) {
   .intro-splash { display: none; }
 }
-
 /* ---------------------------------------------------------------------
    RESET
 --------------------------------------------------------------------- */
@@ -97,7 +88,6 @@ body {
 h1, h2, h3, p { margin: 0; }
 img { max-width: 100%; display: block; }
 button { font: inherit; }
-
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -108,12 +98,10 @@ button { font: inherit; }
   z-index: 999;
 }
 .skip-link:focus { left: 12px; top: 12px; }
-
 :focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
-
 /* ---------------------------------------------------------------------
    BRAND LOGO
 --------------------------------------------------------------------- */
@@ -134,8 +122,6 @@ button { font: inherit; }
   display: none; /* shown once a real logo URL loads successfully */
 }
 .brand-logo img.is-loaded { display: block; }
-
-
 /* ---------------------------------------------------------------------
    TOP NAVBAR
 --------------------------------------------------------------------- */
@@ -191,8 +177,6 @@ button { font: inherit; }
   .navbar-links { gap: 14px; }
   .navbar-link { font-size: 11px; }
 }
-
-
 /* ---------------------------------------------------------------------
    PROGRESS RAIL
 --------------------------------------------------------------------- */
@@ -251,11 +235,9 @@ button { font: inherit; }
   color: var(--ink-45);
   letter-spacing: 0.02em;
 }
-
 @media (max-width: 720px) {
   .progress-rail { display: none; }
 }
-
 /* ---------------------------------------------------------------------
    SECTION SCAFFOLD
 --------------------------------------------------------------------- */
@@ -267,7 +249,6 @@ button { font: inherit; }
   flex-direction: column;
   justify-content: center;
 }
-
 .section-kicker {
   font-family: var(--font-body);
   font-size: 13px;
@@ -275,7 +256,6 @@ button { font: inherit; }
   color: var(--green);
   margin-bottom: 14px;
 }
-
 .section-heading {
   font-family: var(--font-display);
   font-weight: 500;
@@ -284,7 +264,6 @@ button { font: inherit; }
   max-width: 14ch;
   color: var(--ink);
 }
-
 .narrative-line {
   font-family: var(--font-display);
   font-weight: 400;
@@ -294,7 +273,6 @@ button { font: inherit; }
   max-width: var(--measure);
   margin-top: 28px;
 }
-
 /* Reveal-on-scroll: base state, .is-visible applied by app.js */
 .reveal-block {
   opacity: 0;
@@ -303,13 +281,11 @@ button { font: inherit; }
               transform var(--dur-slow) var(--ease-editorial);
 }
 .reveal-block.is-visible { opacity: 1; transform: translateY(0); }
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal-block { opacity: 1; transform: none; transition: none; }
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
-
 /* ---------------------------------------------------------------------
    01 — HERO
 --------------------------------------------------------------------- */
@@ -321,7 +297,6 @@ button { font: inherit; }
   padding-bottom: clamp(64px, 13vh, 128px);
   overflow: hidden;
 }
-
 .hero-media {
   position: absolute;
   inset: 0;
@@ -348,7 +323,6 @@ button { font: inherit; }
   background: radial-gradient(circle, rgba(217,83,30,0.45) 0%, rgba(217,83,30,0) 70%);
 }
 .hero-media.has-image::after { display: none; }
-
 .hero-content {
   position: relative;
   z-index: 2;
@@ -360,7 +334,6 @@ button { font: inherit; }
   padding-left: clamp(24px, 6vw, 80px);
   padding-right: clamp(24px, 6vw, 60px);
 }
-
 .hero-eventtitle {
   font-family: var(--font-body);
   font-weight: 600;
@@ -369,7 +342,6 @@ button { font: inherit; }
   text-transform: uppercase;
   color: rgba(250, 248, 242, 0.82);
 }
-
 .hero-org {
   margin: 0;
   display: flex;
@@ -391,7 +363,6 @@ button { font: inherit; }
   line-height: 1.25;
   color: #F7F3E9;
 }
-
 .scroll-cue {
   position: absolute;
   bottom: 44px;
@@ -425,7 +396,6 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .scroll-cue-line::after { animation: none; top: 100%; }
 }
-
 /* ---------------------------------------------------------------------
    02 / 03 — COUNTER STAGE (shared by systems + sales)
 --------------------------------------------------------------------- */
@@ -451,7 +421,6 @@ button { font: inherit; }
   color: var(--ink-45);
   font-weight: 500;
 }
-
 /* ---------------------------------------------------------------------
    BREAKDOWN — proportional bars
 --------------------------------------------------------------------- */
@@ -463,7 +432,6 @@ button { font: inherit; }
   gap: clamp(36px, 6vw, 72px);
 }
 .breakdown-layout .breakdown { margin-top: 0; flex: 1 1 380px; }
-
 .donut-chart {
   position: relative;
   flex: 0 0 auto;
@@ -503,7 +471,6 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .donut-chart { opacity: 1; transform: none; }
 }
-
 .breakdown-swatch {
   display: inline-block;
   width: 7px;
@@ -512,7 +479,6 @@ button { font: inherit; }
   margin-right: 9px;
   flex: 0 0 auto;
 }
-
 .breakdown {
   margin-top: clamp(56px, 10vh, 96px);
   max-width: 880px;
@@ -534,7 +500,6 @@ button { font: inherit; }
 .breakdown-row.is-visible { opacity: 1; transform: translateX(0); }
 .breakdown:last-of-type .breakdown-row:last-child,
 .breakdown-row:last-child { border-bottom: 1px solid var(--line); }
-
 .breakdown-label {
   display: flex;
   align-items: center;
@@ -566,7 +531,6 @@ button { font: inherit; }
   min-width: 6.5ch;
   text-align: right;
 }
-
 /* ---------------------------------------------------------------------
    04 — CURRENT MOMENTUM / MILESTONES
 --------------------------------------------------------------------- */
@@ -591,7 +555,6 @@ button { font: inherit; }
   color: var(--ink-45);
   font-weight: 500;
 }
-
 .asof-label {
   margin-top: 28px;
   font-size: 13px;
@@ -599,7 +562,6 @@ button { font: inherit; }
   font-style: italic;
   font-family: var(--font-display);
 }
-
 .bifurcation-grid {
   margin-top: clamp(56px, 10vh, 96px);
   display: grid;
@@ -634,8 +596,6 @@ button { font: inherit; }
   content: "To be added";
 }
 .bifurcation-body.has-data::before { content: ""; }
-
-
 .trend-list {
   margin-top: 28px;
   max-width: 880px;
@@ -684,6 +644,106 @@ button { font: inherit; }
 .trend-delta.is-down { color: var(--gold); }
 
 /* ---------------------------------------------------------------------
+   FUTURE PLANS — MONTH CARDS + SALES TABLE
+--------------------------------------------------------------------- */
+.plan-panel {
+  flex: 0 0 100vw;
+  min-height: 58vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--gutter);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.plan-month-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink-45);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.plan-theme {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(28px, 4vw, 46px);
+  color: var(--ink);
+  line-height: 1.1;
+}
+.plan-stats {
+  display: flex;
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: 30px;
+}
+.plan-stat-label {
+  font-size: 11px;
+  color: var(--ink-45);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.plan-stat-value {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 28px);
+  color: var(--gold);
+}
+.plan-actions {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.plan-action {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-70);
+  padding-left: 18px;
+  position: relative;
+}
+.plan-action::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.plan-table-wrap { margin-top: 24px; overflow-x: auto; }
+.plan-table {
+  width: 100%;
+  max-width: 880px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.plan-table th, .plan-table td {
+  padding: 10px 14px;
+  text-align: right;
+  border-bottom: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.plan-table th:first-child, .plan-table td:first-child { text-align: left; }
+.plan-table thead th {
+  font-weight: 600;
+  color: var(--ink-45);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.plan-table tbody td { color: var(--ink-70); }
+.plan-table tfoot td {
+  font-weight: 600;
+  color: var(--ink);
+  border-top: 1px solid var(--ink-20);
+  border-bottom: none;
+}
+/* ---------------------------------------------------------------------
    05 — STORIES
 --------------------------------------------------------------------- */
 .stories {
@@ -703,7 +763,6 @@ button { font: inherit; }
   font-size: 12px;
   color: var(--ink-45);
 }
-
 .story-viewport {
   margin-top: clamp(48px, 8vh, 80px);
   overflow: hidden;
@@ -714,7 +773,6 @@ button { font: inherit; }
   will-change: transform;
   transition: transform 700ms var(--ease-editorial);
 }
-
 .story-arrow {
   position: absolute;
   top: 50%;
@@ -745,7 +803,6 @@ button { font: inherit; }
 @media (max-width: 720px) {
   .story-arrow { width: 38px; height: 38px; }
 }
-
 .story-panel {
   flex: 0 0 100vw;
   display: grid;
@@ -758,7 +815,6 @@ button { font: inherit; }
 .story-panel:nth-child(even) { grid-template-columns: 1fr 1.1fr; }
 .story-panel:nth-child(even) .story-media { order: 2; }
 .story-panel:nth-child(even) .story-copy { order: 1; }
-
 .story-media {
   position: relative;
   aspect-ratio: 4 / 5;
@@ -784,7 +840,6 @@ button { font: inherit; }
   font-size: 12px;
   background: linear-gradient(160deg, var(--panel) 0%, #E7E0CC 100%);
 }
-
 .story-index {
   font-family: var(--font-display);
   font-size: 15px;
@@ -826,7 +881,6 @@ button { font: inherit; }
   font-size: 32px;
   color: var(--ink);
 }
-
 .story-nav {
   display: flex;
   align-items: center;
@@ -849,7 +903,6 @@ button { font: inherit; }
   font-size: 13px;
   color: var(--ink-45);
 }
-
 @media (max-width: 860px) {
   .story-panel, .story-panel:nth-child(even) {
     grid-template-columns: 1fr;
@@ -859,7 +912,6 @@ button { font: inherit; }
   .story-panel:nth-child(even) .story-copy { order: unset; }
   .story-media { aspect-ratio: 16/10; }
 }
-
 /* ---------------------------------------------------------------------
    FOOTER
 --------------------------------------------------------------------- */
@@ -869,7 +921,6 @@ button { font: inherit; }
   color: var(--ink-45);
   border-top: 1px solid var(--line);
 }
-
 /* ---------------------------------------------------------------------
    RESPONSIVE — smaller laptops / tablets / phones
 --------------------------------------------------------------------- */
