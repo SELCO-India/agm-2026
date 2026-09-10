@@ -326,5 +326,28 @@
 </main>
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
+<script>
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    const navOverlay = document.getElementById('navOverlay');
+
+    function toggleMenu() {
+      navMenu.classList.toggle('is-active');
+      navOverlay.classList.toggle('is-active');
+    }
+
+    if (navToggle) {
+      navToggle.addEventListener('click', toggleMenu);
+      navOverlay.addEventListener('click', toggleMenu);
+
+      // Close sidebar when clicking any menu link
+      document.querySelectorAll('.navbar-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('is-active');
+          navOverlay.classList.remove('is-active');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
