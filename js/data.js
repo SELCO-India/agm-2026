@@ -10,7 +10,6 @@
  * you need.
  * -----------------------------------------------------------------------
  */
-
 /* -------------------------------------------------------------------- *
  * 1. IMAGE SOURCES
  * -------------------------------------------------------------------- *
@@ -32,7 +31,6 @@
  * the share link. The file's Drive sharing setting must be
  * "Anyone with the link can view".
  * -------------------------------------------------------------------- */
-
 /**
  * Converts a public Google Drive file ID into a direct image URL.
  * Works for images shared as "Anyone with the link can view".
@@ -43,7 +41,6 @@ function driveImageUrl(fileId) {
   if (!fileId) return "";
   return `https://lh3.googleusercontent.com/d/${fileId}`;
 }
- 
 const imageSources = {
   // Opening hero background. A free, no-watermark stock photo (solar
   // panels across a green field — via Pexels, free to use) is set here
@@ -53,22 +50,18 @@ const imageSources = {
   // landscape photo like this — very light/white photos will look washed
   // out under it.
   hero: "assets/Banner.png",
-
   // SELCO logo, shown fixed top-left across the whole site. Leave blank to
   // show no logo. Upload your logo file into the assets/ folder (e.g.
   // assets/logo.png) and put that path here, e.g. "assets/logo.png".
   // A Google Drive link (via driveUrl(...)) also works.
   logo: "assets/SELCO.png",
-
   // Optional secondary texture/photo used behind the data sections.
   // Leave blank to keep those sections purely typographic.
   dataSectionAmbient: "",
 };
-
 /* -------------------------------------------------------------------- *
  * 2. FY 2025–26 — SYSTEMS / SOLUTIONS DELIVERED
  * -------------------------------------------------------------------- */
-
 const fy2526Systems = {
   total: 9004,
   // Neutral wording used until exact terminology is confirmed.
@@ -83,14 +76,12 @@ const fy2526Systems = {
     { name: "Water Heater", value: 1996 },
   ],
 };
-
 /* -------------------------------------------------------------------- *
  * 3. FY 2025–26 — SALES
  * -------------------------------------------------------------------- *
  * Exact figures (₹) are retained for calculation. Display uses rounded
  * Cr figures per SELCO's stated convention.
  * -------------------------------------------------------------------- */
-
 const fy2526Sales = {
   totalExact: 680694351.13,
   totalDisplay: "₹68.07 Cr",
@@ -106,7 +97,6 @@ const fy2526Sales = {
     { name: "Basic Energy Medium", value: 190993320.00 },
   ],
 };
-
 /* -------------------------------------------------------------------- *
  * 4. FY 2026–27 — CURRENT MOMENTUM (SO FAR, NOT FINAL)
  * -------------------------------------------------------------------- *
@@ -115,13 +105,11 @@ const fy2526Sales = {
  * an empty-state placeholder when an array has no entries, so you can
  * add rows here later without touching any other file.
  * -------------------------------------------------------------------- */
-
 const fy2627Current = {
   totalSalesDisplay: "₹20.66 Cr",
   totalSalesExact: 206600000, // approximate — replace with exact figure when available
   systemsDisplay: "3K",
   asOfLabel: "So far this year",
-
   salesBifurcation: [
     { name: "Basic Energy – Small", value: 4963402.92 },
     { name: "Basic Energy – Medium", value: 68661955.42 },
@@ -151,9 +139,6 @@ const fy2627Current = {
     { name: "Livelihood", value: 69.6 },
   ],
 };
-
-
-
 /* -------------------------------------------------------------------- *
  * 5. STORIES BEHIND THE NUMBERS
  * -------------------------------------------------------------------- *
@@ -167,7 +152,6 @@ const fy2627Current = {
  *     "assets/stories/story01.jpg" (simplest — see README.md, section 6), or
  *   - a Google Drive share link, wrapped as driveUrl("https://drive.google.com/...")
  * -------------------------------------------------------------------- */
-
 const stories = [
   {
     title: "Swami Vivekananda Cultural Youth Centre – Swami Smaraka",
@@ -279,38 +263,30 @@ const stories = [
   quote: "",
 },
 ];
- 
 /* -------------------------------------------------------------------- *
  * 6. SECTION COPY
  * -------------------------------------------------------------------- *
  * Editorial copy, kept separate so it can be refined without touching
  * structure or numbers.
  * -------------------------------------------------------------------- */
- 
 const copy = {
   org: "SELCO Solar Light Private Limited",
   eventTitle: "Annual General Meeting 2026",
- 
   achievementsKicker: "A data story",
   achievementsHeading: "What we achieved in FY 2025–26",
- 
   systemsIntro:
     "Behind the number are different needs, different places, and different ways of enabling energy access.",
- 
   salesHeading: "FY 2025–26 — Sales",
   salesIntro:
     "The year translated into a diverse portfolio of work — from essential energy solutions to institutional, community and livelihood applications.",
- 
   currentHeading: "What we have done till today",
   currentSubheading: "FY 2026–27",
   currentIntro:
     "The year is still unfolding. These figures reflect progress so far, not a final result.",
- 
   storiesHeading: "Stories behind the numbers",
   storiesIntro:
     "A closer look at some of the work behind this year's figures.",
 };
-
 const financialsSummary = {
   period: "Apr–Aug 2026",
   incomeExpenditure: [
@@ -328,4 +304,113 @@ const financialsSummary = {
     { name: "Cash & Bank", currentValue: 10156957, previousLabel: "As on Aug 2025", previousValue: 21512417, changePct: -52.79 },
   ],
 };
- 
+/* -------------------------------------------------------------------- *
+ * FUTURE PLANS — 7-MONTH ROADMAP (Sep 2026 – Mar 2027)
+ * -------------------------------------------------------------------- */
+const futurePlans = {
+  kicker: "7-Month Business Plan & Execution Roadmap · Sep 2026 – Mar 2027",
+  heading: "The Road Ahead",
+  intro:
+    "Over the next seven months, SELCO will convert its strong community presence into a more predictable, profitable, and measurable growth engine — by focusing on livelihood solutions, institutional projects, financing partnerships, and disciplined after-sales service.",
+  closing: "Grow the right segments, collect with discipline, protect profitability, and execute together.",
+  months: [
+    {
+      label: "Sep 2026",
+      theme: "Reset the business engine",
+      salesRevenue: "₹6 Cr",
+      collections: "₹6 Cr",
+      actions: [
+        "Review debtors’ receivables and assign collection owners",
+        "Train sales teams on solution-based selling",
+        "Increase sales capacity in high-performing branches",
+      ],
+    },
+    {
+      label: "Oct 2026",
+      theme: "Build the pipeline",
+      salesRevenue: "₹8 Cr",
+      collections: "₹8 Cr",
+      actions: [
+        "Publish a weekly branch scorecard",
+        "Conduct livelihood customer camps",
+        "Create a 3× qualified pipeline for the next 5 months (₹120 Cr)",
+        "Track every major project through a CSD",
+      ],
+    },
+    {
+      label: "Nov 2026",
+      theme: "Close institutional demand",
+      salesRevenue: "₹7 Cr",
+      collections: "₹8 Cr",
+      actions: [
+        "Submit proposals to schools, healthcare and community institutions",
+        "Convert pilot projects into repeat orders",
+        "Run a customer-referral campaign",
+      ],
+    },
+    {
+      label: "Dec 2026",
+      theme: "Mobilise & accelerate",
+      salesRevenue: "₹8 Cr",
+      collections: "₹9 Cr",
+      actions: [
+        "Audit all branches: sales, backlog, receivables, service",
+        "Increase installation capacity for winning products",
+        "Conduct mid-plan performance review",
+      ],
+    },
+    {
+      label: "Jan 2027",
+      theme: "Build volume",
+      salesRevenue: "₹7 Cr",
+      collections: "₹8 Cr",
+      actions: [
+        "Launch service-renewal drives",
+        "Weekly lead-generation campaigns",
+      ],
+    },
+    {
+      label: "Feb 2027",
+      theme: "Reset the business engine",
+      salesRevenue: "₹6 Cr",
+      collections: "₹6 Cr",
+      actions: [
+        "Double down on the highest-converting branches and segments",
+        "Improve repeat orders and cross-selling",
+        "Review inventory ageing and procurement lead times",
+        "Start the next 13-month pipeline",
+      ],
+    },
+    {
+      label: "Mar 2027",
+      theme: "Deliver & collect",
+      salesRevenue: "₹11 Cr",
+      collections: "₹8 Cr",
+      actions: [
+        "Complete priority installations",
+        "Conduct daily collections and dispatch reviews",
+        "Protect quality and customer experience during peak volume",
+        "Close pending documentation and billing",
+        "Finalise next-year branch and segment targets",
+      ],
+    },
+  ],
+};
+
+const fy2627SalesPlan = {
+  rows: [
+    { month: "Sep-26", target: 6.14, achieved: 6, plan: 6 },
+    { month: "Oct-26", target: 6.18, achieved: 8, plan: 8 },
+    { month: "Nov-26", target: 6.25, achieved: 7, plan: 8 },
+    { month: "Dec-26", target: 6.4, achieved: 8, plan: 9 },
+    { month: "Jan-27", target: 6.48, achieved: 7, plan: 8 },
+    { month: "Feb-27", target: 6.56, achieved: 6, plan: 6 },
+    { month: "Mar-27", target: 9.39, achieved: 11, plan: 8 },
+  ],
+  // NOTE: your "Sales Achieved" total (20.83) doesn't match the sum of
+  // the monthly figures above (53) — flagged this earlier and used your
+  // numbers as given. Correct whichever is right and update this line.
+  totals: { target: 47.4, achieved: 20.83, plan: 53 },
+  narrative:
+    "We’re targeting up to ₹53 Cr by March 2027, and are confident of delivering at least ₹47+ Cr.",
+};
