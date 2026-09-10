@@ -260,8 +260,8 @@ const stories = [
   year: "2026",
   description:
     "A dental clinic's existing 3 kWp solar setup was expanded into an 8 kWp single-phase hybrid system with 10 kWh of lithium battery storage, configured for zero grid export. Solar covers the clinic's loads first, the battery fills the gaps, and the grid steps in only when needed \u2014 engineered around a 3 kW sanctioned load per meter.",
-  image: "",
-  imageSecondary: "",
+  image: "assets/Banner.png",
+  imageSecondary: "assets/Banner.png",
   metric: "8 kWp hybrid + 10 kWh lithium, \u20b97.25 lakh",
   quote: "",
 },
