@@ -644,13 +644,14 @@ function initFinancialsSection() {
       var el = document.getElementById("future-sales-table");
       if (!el || typeof fy2627SalesPlan === "undefined") return;
       var rowsHtml = fy2627SalesPlan.rows.map(function (r) {
-        return "<tr><td>" + r.month + "</td><td>" + r.target + "</td><td>" + r.achieved + "</td><td>" + r.plan + "</td></tr>";
-      }).join("");
-      var t = fy2627SalesPlan.totals;
-      el.innerHTML =
-        "<thead><tr><th>Month</th><th>Sales Target</th><th>Sales Achieved</th><th>Sales Plan</th></tr></thead>" +
-        "<tbody>" + rowsHtml + "</tbody>" +
-        "<tfoot><tr><td>Total</td><td>" + t.target + "</td><td>" + t.achieved + "</td><td>" + t.plan + "</td></tr></tfoot>";
+  return "<tr><td>" + r.month + "</td><td>" + r.salesPlan + "</td><td>" + r.collectionPlan + "</td></tr>";
+}).join("");
+
+var t = fy2627SalesPlan.totals;
+el.innerHTML =
+"<thead><tr><th>Month</th><th>Sales Plan</th><th>Collection Plan</th></tr></thead>" +
+"<tbody>" + rowsHtml + "</tbody>" +
+"<tfoot><tr><td>Total</td><td>" + t.salesPlan + "</td><td>" + t.collectionPlan + "</td></tr></tfoot>";
       document.getElementById("future-narrative").textContent = fy2627SalesPlan.narrative;
     }
 
