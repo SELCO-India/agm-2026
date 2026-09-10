@@ -110,7 +110,7 @@ const fy2627Current = {
   totalSalesExact: 208700000, // approximate — replace with exact figure when available
   systemsDisplay: "3K",
   asOfLabel: "So far this year",
-  const salesBifurcation = [
+  salesBifurcation: = [
   { label: "Basic Energy Small", value: "₹57.78 L" },
   { label: "Basic Energy Medium", value: "₹7.99 Cr" },
   { label: "Institutional", value: "₹4.10 Cr" },
