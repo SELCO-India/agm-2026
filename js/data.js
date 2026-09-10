@@ -163,7 +163,7 @@ const stories = [
     year: "2026",
     description:
       "Built on the grounds of Swami Vivekananda's 1892 visit, the centre now runs on a 100 kW on-grid solar system, generating an average of 1,44,432 kWh a year and offsetting an estimated 114.10 tons of CO₂ annually.",
-    image: "", // add photo — see README.md section 6
+    image: "assets/Vivekananada.png", // add photo — see README.md section 6
     imageSecondary: "",
     metric: "114.10 tons CO₂ offset per year",
     quote: "",
