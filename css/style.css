@@ -807,9 +807,10 @@ button { font: inherit; }
   pointer-events: none;
 }
 
-#section-stories .narrative-line {
-  max-width: 70ch;
-  margin-top: 18px;
+#section-future .narrative-line {
+  max-width: 72ch;
+  font-size: clamp(18px, 2.1vw, 22px);
+  line-height: 1.45;
 }
 
 #section-future .story-arrow {
