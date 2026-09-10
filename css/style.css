@@ -865,6 +865,9 @@ button { font: inherit; }
 }
 .story-panel {
   flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   min-height: 68vh;
