@@ -1,24 +1,17 @@
 /**
  * AGM 2026 — APPLICATION LOGIC
- * -----------------------------------------------------------------------
- * Rendering, animation and interaction. Content lives in data.js —
- * this file should rarely need editing when updating the presentation.
- * -----------------------------------------------------------------------
  */
 (function () {
   "use strict";
   var prefersReducedMotion =
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Muted greens/golds only — stays inside the existing brand palette
-  // rather than introducing new hues just for the charts.
+
   var CHART_PALETTE = [
     "#4F6B47", "#B37E2E", "#8CA67F", "#8A5A22",
     "#6C8A62", "#D9B47E", "#37492F", "#C79A5B", "#A9C49A"
   ];
-  /* ===================================================================
-   * UTILITIES
-   * =================================================================== */
+
   function formatInt(n) {
     return Math.round(n).toLocaleString("en-IN");
   }
@@ -26,16 +19,18 @@
     return "₹" + (exactRupees / 10000000).toFixed(2) + " Cr";
   }
   function formatRupeeShort(n) {
-    // Used for in-bar values under the sales breakdown (in Lakh/Cr as appropriate)
     if (n >= 10000000) return "₹" + (n / 10000000).toFixed(2) + " Cr";
     if (n >= 100000) return "₹" + (n / 100000).toFixed(1) + " L";
     return "₹" + formatInt(n);
   }
-  /**
-   * Renders a donut chart into `container` using conic-gradient — no
-   * canvas/SVG/library needed. `categories` is an array of {name, value}
-   * IN THE SAME ORDER used for that section's bars, so colours line up.
-   */
+  function formatSubtleCurrencies(inrExact) {
+    var eur = (inrExact / 90).toFixed(0);
+    var usd = (inrExact / 83).toFixed(0);
+    var eurStr = eur >= 1000000 ? (eur/1000000).toFixed(2) + "M" : (eur >= 1000 ? (eur/1000).toFixed(1) + "k" : formatInt(eur));
+    var usdStr = usd >= 1000000 ? (usd/1000000).toFixed(2) + "M" : (usd >= 1000 ? (usd/1000).toFixed(1) + "k" : formatInt(usd));
+    return " (€" + eurStr + " / $" + usdStr + ")";
+  }
+
   function buildDonutChart(container, centerEl, categories, centerDisplay) {
     if (!container) return;
     var total = categories.reduce(function (sum, c) { return sum + c.value; }, 0);
@@ -50,14 +45,11 @@
     container.style.background = "conic-gradient(" + stops.join(", ") + ")";
     if (centerEl) centerEl.textContent = centerDisplay;
   }
+
   function easeOutExpo(t) {
     return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
   }
-  /**
-   * Animate a number from 0 to `target`, calling onUpdate(value) each frame.
-   * Uses requestAnimationFrame; respects prefers-reduced-motion by jumping
-   * straight to the final value.
-   */
+
   function animateNumber(target, duration, onUpdate, onComplete) {
     if (prefersReducedMotion) {
       onUpdate(target);
@@ -80,9 +72,7 @@
     }
     requestAnimationFrame(step);
   }
-  /* ===================================================================
-   * SCROLL REVEAL (generic .reveal-block handler)
-   * =================================================================== */
+
   function initRevealObserver() {
     var blocks = document.querySelectorAll(".reveal-block");
     if (!("IntersectionObserver" in window) || prefersReducedMotion) {
@@ -102,9 +92,7 @@
     );
     blocks.forEach(function (el) { observer.observe(el); });
   }
-  /* ===================================================================
-   * SECTION 02 — SYSTEMS COUNTER + BREAKDOWN
-   * =================================================================== */
+
   function initSystemsSection() {
     var stage = document.getElementById("systems-counter-stage");
     var counterEl = document.getElementById("systems-counter");
@@ -114,11 +102,7 @@
     if (!stage || typeof fy2526Systems === "undefined") return;
     labelEl.textContent = fy2526Systems.totalLabel;
     introLine.textContent = copy.systemsIntro;
-    // Build breakdown rows (hidden until revealed)
-    var maxValue = Math.max.apply(
-      null,
-      fy2526Systems.categories.map(function (c) { return c.value; })
-    );
+    var maxValue = Math.max.apply(null, fy2526Systems.categories.map(function (c) { return c.value; }));
     fy2526Systems.categories.forEach(function (cat, i) {
       var color = CHART_PALETTE[i % CHART_PALETTE.length];
       var row = buildBreakdownRow(cat.name, cat.value, maxValue, false, i, color);
@@ -144,23 +128,21 @@
       { threshold: 0.5 }
     );
     observer.observe(stage);
-    initBreakdownReveal(breakdownEl, false);
+    initBreakdownReveal(breakdownEl);
   }
-  /* ===================================================================
-   * SECTION 03 — SALES COUNTER + BREAKDOWN
-   * =================================================================== */
+
   function initSalesSection() {
     var stage = document.getElementById("sales-counter-stage");
     var counterEl = document.getElementById("sales-counter");
+    var subtleLabelEl = document.getElementById("sales-subtle-label");
     var introLine = document.getElementById("sales-intro-line");
     var breakdownEl = document.getElementById("sales-breakdown");
     var headingEl = document.getElementById("sales-heading");
     if (!stage || typeof fy2526Sales === "undefined") return;
     headingEl.textContent = "Sales";
     introLine.textContent = copy.salesIntro;
-    var sorted = fy2526Sales.categories.slice().sort(function (a, b) {
-      return b.value - a.value;
-    });
+    if (subtleLabelEl) subtleLabelEl.textContent = fy2526Sales.totalSubtleDisplay;
+    var sorted = fy2526Sales.categories.slice().sort(function (a, b) { return b.value - a.value; });
     var maxValue = sorted[0].value;
     sorted.forEach(function (cat, i) {
       var color = CHART_PALETTE[i % CHART_PALETTE.length];
@@ -187,8 +169,9 @@
       { threshold: 0.5 }
     );
     observer.observe(stage);
-    initBreakdownReveal(breakdownEl, true);
+    initBreakdownReveal(breakdownEl);
   }
+
   function buildBreakdownRow(name, value, maxValue, isCurrency, index, color) {
     var row = document.createElement("div");
     row.className = "breakdown-row";
@@ -210,14 +193,27 @@
     fill.className = "breakdown-bar-fill";
     fill.style.setProperty("--target-width", (value / maxValue) * 100 + "%");
     track.appendChild(fill);
+    
+    var valueWrap = document.createElement("div");
+    valueWrap.className = "breakdown-value-wrap";
     var valueEl = document.createElement("p");
     valueEl.className = "breakdown-value";
     valueEl.textContent = isCurrency ? formatRupeeShort(value) : formatInt(value);
+    valueWrap.appendChild(valueEl);
+
+    if (isCurrency) {
+      var subtleEl = document.createElement("p");
+      subtleEl.className = "breakdown-subtle";
+      subtleEl.textContent = formatSubtleCurrencies(value);
+      valueWrap.appendChild(subtleEl);
+    }
+
     row.appendChild(label);
     row.appendChild(track);
-    row.appendChild(valueEl);
+    row.appendChild(valueWrap);
     return row;
   }
+
   function initBreakdownReveal(container) {
     var rows = container.querySelectorAll(".breakdown-row");
     if (!("IntersectionObserver" in window)) {
@@ -245,30 +241,29 @@
     );
     rows.forEach(function (r) { observer.observe(r); });
   }
-  /* ===================================================================
-   * SECTION 04 — FY 2026–27 CURRENT MOMENTUM
-   * =================================================================== */
+
   function initCurrentSection() {
     if (typeof fy2627Current === "undefined") return;
     document.getElementById("current-subheading").textContent = copy.currentSubheading;
     document.getElementById("current-intro-line").textContent = copy.currentIntro;
     document.getElementById("current-asof").textContent = fy2627Current.asOfLabel;
     var salesFigureEl = document.getElementById("current-sales-figure");
+    var salesSubtleEl = document.getElementById("current-sales-subtle");
     var systemsFigureEl = document.getElementById("current-systems-figure");
     var stage = document.querySelector(".milestones");
+    if (salesSubtleEl) salesSubtleEl.textContent = fy2627Current.totalSalesSubtleDisplay;
+
     var hasRun = false;
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting && !hasRun) {
             hasRun = true;
-            // Sales: count up to the exact underlying figure, display in Cr.
             animateNumber(fy2627Current.totalSalesExact, 1600, function (v) {
               salesFigureEl.textContent = "₹" + (v / 10000000).toFixed(2) + " Cr";
             }, function () {
               salesFigureEl.textContent = fy2627Current.totalSalesDisplay;
             });
-            // Systems: "3K" is a rounded label — animate the numeral, then settle on label.
             animateNumber(3000, 1600, function (v) {
               systemsFigureEl.textContent = formatInt(v);
             }, function () {
@@ -281,20 +276,19 @@
       { threshold: 0.5 }
     );
     if (stage) observer.observe(stage);
-    renderBifurcation("sales-bifurcation-body", fy2627Current.salesBifurcation, formatRupeeShort);
+
+    renderBifurcation("sales-bifurcation-body", fy2627Current.salesBifurcation, function(val) {
+      return formatRupeeShort(val) + '<span class="subtle-curr">' + formatSubtleCurrencies(val) + '</span>';
+    });
     renderBifurcation("systems-bifurcation-body", fy2627Current.systemsBifurcation, formatInt);
-    renderBifurcation("capacity-bifurcation-body", fy2627Current.capacityBifurcation, formatKwp);
-    function formatKwp(n) {
-  return n.toLocaleString("en-IN", { maximumFractionDigits: 1 }) + " kWp";
-}
+    renderBifurcation("capacity-bifurcation-body", fy2627Current.capacityBifurcation, function(n) {
+      return n.toLocaleString("en-IN", { maximumFractionDigits: 1 }) + " kWp";
+    });
   }
+
   function renderBifurcation(containerId, dataArr, formatter) {
     var el = document.getElementById(containerId);
-    if (!el) return;
-    if (!dataArr || dataArr.length === 0) {
-      // Leave the CSS empty-state ("To be added") in place.
-      return;
-    }
+    if (!el || !dataArr || dataArr.length === 0) return;
     el.classList.add("has-data");
     el.innerHTML = "";
     var list = document.createElement("div");
@@ -310,94 +304,103 @@
       var name = document.createElement("span");
       name.textContent = item.name;
       var val = document.createElement("span");
-      val.textContent = formatter(item.value);
+      val.innerHTML = formatter(item.value);
       row.appendChild(name);
       row.appendChild(val);
       list.appendChild(row);
     });
     el.appendChild(list);
   }
+
   function renderLineItems(containerId, items) {
-  var el = document.getElementById(containerId);
-  if (!el || !items || !items.length) return;
-  el.classList.add("has-data");
-  el.innerHTML = "";
-  var list = document.createElement("div");
-  list.style.width = "100%";
-  items.forEach(function (item) {
-    var row = document.createElement("div");
-    row.style.display = "flex";
-    row.style.justifyContent = "space-between";
-    row.style.padding = "6px 0";
-    row.style.fontSize = item.emphasis ? "14px" : "13px";
-    row.style.fontWeight = item.emphasis ? "600" : "400";
-    row.style.fontFamily = "var(--font-body)";
-    row.style.color = item.emphasis ? "var(--ink)" : "var(--ink-70)";
-    var label = document.createElement("span");
-    label.textContent = item.label;
-    var val = document.createElement("span");
-    val.textContent = item.isText ? item.value : formatRupeeShort(item.value);
-    row.appendChild(label);
-    row.appendChild(val);
-    list.appendChild(row);
-  });
-  el.appendChild(list);
-}
-function initFinancialsSection() {
-  if (typeof financialsSummary === "undefined") return;
-  var periodEl = document.getElementById("financials-period");
-  if (periodEl) periodEl.textContent = financialsSummary.period;
-  renderLineItems("income-expenditure-body", financialsSummary.incomeExpenditure);
-  var debtorsEl = document.getElementById("debtors-body");
-  if (debtorsEl && financialsSummary.debtors) {
-    debtorsEl.classList.add("has-data");
-    debtorsEl.innerHTML =
-      '<div><p style="font-family:var(--font-display); font-size:clamp(22px,2.6vw,30px); color:var(--ink);">' +
-      formatRupeeShort(financialsSummary.debtors.value) +
-      '</p><p style="font-size:12px; color:var(--ink-45); margin-top:4px;">As on ' +
-      financialsSummary.debtors.asOf + "</p></div>";
-  }
-  var trendsWrap = document.getElementById("financial-trends-list");
-  if (trendsWrap && financialsSummary.trends) {
-    trendsWrap.innerHTML = "";
-    financialsSummary.trends.forEach(function (t) {
-      var isUp = t.changePct >= 0;
+    var el = document.getElementById(containerId);
+    if (!el || !items || !items.length) return;
+    el.classList.add("has-data");
+    el.innerHTML = "";
+    var list = document.createElement("div");
+    list.style.width = "100%";
+    items.forEach(function (item) {
       var row = document.createElement("div");
-      row.className = "trend-row";
-      row.innerHTML =
-        '<p class="trend-name">' + t.name + "</p>" +
-        '<div class="trend-figures">' +
-        '<p class="trend-current">' + formatRupeeShort(t.currentValue) + "</p>" +
-        '<p class="trend-previous">' + t.previousLabel + ": " + formatRupeeShort(t.previousValue) + "</p>" +
-        "</div>" +
-        '<p class="trend-delta ' + (isUp ? "is-up" : "is-down") + '">' +
-        (isUp ? "▲ " : "▼ ") + Math.abs(t.changePct).toFixed(2) + "%</p>";
-      trendsWrap.appendChild(row);
+      row.style.display = "flex";
+      row.style.justifyContent = "space-between";
+      row.style.padding = "6px 0";
+      row.style.fontSize = item.emphasis ? "14px" : "13px";
+      row.style.fontWeight = item.emphasis ? "600" : "400";
+      row.style.fontFamily = "var(--font-body)";
+      row.style.color = item.emphasis ? "var(--ink)" : "var(--ink-70)";
+      var label = document.createElement("span");
+      label.textContent = item.label;
+      var val = document.createElement("span");
+      if (item.isText) {
+        val.textContent = item.value;
+      } else {
+        val.innerHTML = formatRupeeShort(item.value) + '<span class="subtle-curr">' + formatSubtleCurrencies(item.value) + '</span>';
+      }
+      row.appendChild(label);
+      row.appendChild(val);
+      list.appendChild(row);
     });
+    el.appendChild(list);
   }
-}
-  /* ===================================================================
-   * SECTION 05 — STORIES (horizontal scroll within vertical page)
-   * =================================================================== */
+
+  function initFinancialsSection() {
+    if (typeof financialsSummary === "undefined") return;
+    var periodEl = document.getElementById("financials-period");
+    if (periodEl) periodEl.textContent = financialsSummary.period;
+    renderLineItems("income-expenditure-body", financialsSummary.incomeExpenditure);
+    var debtorsEl = document.getElementById("debtors-body");
+    if (debtorsEl && financialsSummary.debtors) {
+      debtorsEl.classList.add("has-data");
+      debtorsEl.innerHTML =
+        '<div><p style="font-family:var(--font-display); font-size:clamp(22px,2.6vw,30px); color:var(--ink);">' +
+        formatRupeeShort(financialsSummary.debtors.value) +
+        '<span style="font-size:14px; font-family:var(--font-body); color:var(--ink-45); margin-left:6px;">' +
+        formatSubtleCurrencies(financialsSummary.debtors.value) + '</span></p>' +
+        '<p style="font-size:12px; color:var(--ink-45); margin-top:4px;">As on ' +
+        financialsSummary.debtors.asOf + "</p></div>";
+    }
+    var trendsWrap = document.getElementById("financial-trends-list");
+    if (trendsWrap && financialsSummary.trends) {
+      trendsWrap.innerHTML = "";
+      financialsSummary.trends.forEach(function (t) {
+        var isUp = t.changePct >= 0;
+        var row = document.createElement("div");
+        row.className = "trend-row";
+        row.innerHTML =
+          '<p class="trend-name">' + t.name + "</p>" +
+          '<div class="trend-figures">' +
+          '<p class="trend-current">' + formatRupeeShort(t.currentValue) +
+          '<span class="subtle-curr">' + formatSubtleCurrencies(t.currentValue) + '</span></p>' +
+          '<p class="trend-previous">' + t.previousLabel + ": " + formatRupeeShort(t.previousValue) + "</p>" +
+          "</div>" +
+          '<p class="trend-delta ' + (isUp ? "is-up" : "is-down") + '">' +
+          (isUp ? "▲ " : "▼ ") + Math.abs(t.changePct).toFixed(2) + "%</p>";
+        trendsWrap.appendChild(row);
+      });
+    }
+  }
+
   var StoryController = (function () {
-    var viewport, track, dotsEl, currentEl, totalEl, section, prevBtn, nextBtn;
+    var viewport, track, dotsEl, currentEl, totalEl, prevBtn, nextBtn;
     var current = 0;
     var total = 0;
-    var isActive = false; // true when the section owns wheel/keyboard input
+    var isActive = false;
+
     function build() {
       viewport = document.getElementById("story-viewport");
       track = document.getElementById("story-track");
       dotsEl = document.getElementById("story-dots");
       currentEl = document.getElementById("story-current");
       totalEl = document.getElementById("story-total");
-      section = document.getElementById("section-stories");
       prevBtn = document.getElementById("story-arrow-prev");
       nextBtn = document.getElementById("story-arrow-next");
       if (!track || typeof stories === "undefined") return;
+
       document.getElementById("stories-heading").textContent = copy.storiesHeading;
       document.getElementById("stories-intro-line").textContent = copy.storiesIntro;
       total = stories.length;
       totalEl.textContent = String(total).padStart(2, "0");
+
       stories.forEach(function (story, i) {
         track.appendChild(buildStoryPanel(story, i));
         var dot = document.createElement("span");
@@ -406,51 +409,31 @@ function initFinancialsSection() {
         dotsEl.appendChild(dot);
       });
       updateUI();
+
       if (prevBtn) prevBtn.addEventListener("click", function () { prev(); });
       if (nextBtn) nextBtn.addEventListener("click", function () { next(); });
       viewport.addEventListener("wheel", onWheel, { passive: false });
       viewport.addEventListener("keydown", onKeydown);
       window.addEventListener("keydown", onWindowKeydown);
-      // Lazy-load images as their panel nears view
-      var imgObserver = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              var img = entry.target.querySelector("img[data-src]");
-              if (img) {
-                var src = img.getAttribute("data-src");
-                if (src) {
-                  img.src = src;
-                  img.addEventListener("load", function () { img.classList.add("is-loaded"); });
-                  img.addEventListener("error", function () {
-                    img.remove(); // graceful fallback to the placeholder gradient
-                  });
-                }
-                img.removeAttribute("data-src");
-              }
-            }
-          });
-        },
-        { root: viewport, threshold: 0.15 }
-      );
-      track.querySelectorAll(".story-panel").forEach(function (p) { imgObserver.observe(p); });
     }
+
     function buildStoryPanel(story, i) {
       var panel = document.createElement("article");
       panel.className = "story-panel";
       var media = document.createElement("div");
       media.className = "story-media";
+      
       if (story.image) {
         var img = document.createElement("img");
-        img.setAttribute("data-src", story.image);
+        img.src = story.image;
         img.alt = story.title || ("Story " + (i + 1));
-        img.loading = "lazy";
         media.appendChild(img);
       }
       var placeholder = document.createElement("div");
       placeholder.className = "story-media-placeholder";
       placeholder.textContent = story.image ? "" : "Photo to be added";
       media.appendChild(placeholder);
+
       var copyEl = document.createElement("div");
       copyEl.className = "story-copy";
       var indexEl = document.createElement("p");
@@ -458,17 +441,19 @@ function initFinancialsSection() {
       indexEl.textContent = String(i + 1).padStart(2, "0") + " / " + String(total || stories.length).padStart(2, "0");
       var title = document.createElement("h3");
       title.className = "story-title";
-      title.textContent = story.title || "Story title goes here";
+      title.textContent = story.title || "";
       var category = document.createElement("p");
       category.className = "story-category";
-      category.textContent = story.category || "Category";
+      category.textContent = story.category || "";
       var desc = document.createElement("p");
       desc.className = "story-description";
       desc.textContent = story.description || "";
+
       copyEl.appendChild(indexEl);
       copyEl.appendChild(title);
       copyEl.appendChild(category);
       copyEl.appendChild(desc);
+
       if (story.metric) {
         var metric = document.createElement("p");
         metric.className = "story-metric";
@@ -494,6 +479,7 @@ function initFinancialsSection() {
       panel.appendChild(copyEl);
       return panel;
     }
+
     function updateUI() {
       var offset = current * -100;
       track.style.transform = "translateX(" + offset + "%)";
@@ -503,22 +489,14 @@ function initFinancialsSection() {
       if (prevBtn) prevBtn.disabled = current === 0;
       if (nextBtn) nextBtn.disabled = current === total - 1;
     }
+
     function goTo(index) {
       current = Math.max(0, Math.min(total - 1, index));
       updateUI();
     }
-    function next() {
-      if (current < total - 1) { goTo(current + 1); return true; }
-      return false;
-    }
-    function prev() {
-      if (current > 0) { goTo(current - 1); return true; }
-      return false;
-    }
-    // Vertical wheel movement is translated into horizontal story movement
-    // while the section is centered in the viewport; once the user has
-    // exhausted the stories in a direction, the page continues to scroll
-    // vertically as normal.
+    function next() { if (current < total - 1) { goTo(current + 1); return true; } return false; }
+    function prev() { if (current > 0) { goTo(current - 1); return true; } return false; }
+
     function onWheel(e) {
       if (!isActive) return;
       var horizontalIntent = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
@@ -534,7 +512,7 @@ function initFinancialsSection() {
       else if (e.key === "ArrowLeft") { if (prev()) e.preventDefault(); }
     }
     function onWindowKeydown(e) {
-      if (document.activeElement === viewport) return; // handled by onKeydown
+      if (document.activeElement === viewport) return;
       if (!isActive) return;
       if (e.key === "ArrowRight") { if (next()) e.preventDefault(); }
       else if (e.key === "ArrowLeft") { if (prev()) e.preventDefault(); }
@@ -542,6 +520,7 @@ function initFinancialsSection() {
     function setActive(val) { isActive = val; }
     return { build: build, setActive: setActive, next: next, prev: prev };
   })();
+
   function initStoriesActivation() {
     var section = document.getElementById("section-stories");
     if (!section || !("IntersectionObserver" in window)) return;
@@ -556,12 +535,8 @@ function initFinancialsSection() {
     observer.observe(section);
   }
 
-  /* ===================================================================
-   * FUTURE PLANS — 7-MONTH ROADMAP (horizontal cards, mirrors StoryController)
-   * =================================================================== */
-
   var PlanController = (function () {
-    var viewport, track, dotsEl, currentEl, totalEl, section, prevBtn, nextBtn;
+    var viewport, track, dotsEl, currentEl, totalEl, prevBtn, nextBtn;
     var current = 0;
     var total = 0;
     var isActive = false;
@@ -572,7 +547,6 @@ function initFinancialsSection() {
       dotsEl = document.getElementById("plan-dots");
       currentEl = document.getElementById("plan-current");
       totalEl = document.getElementById("plan-total");
-      section = document.getElementById("section-future");
       prevBtn = document.getElementById("plan-arrow-prev");
       nextBtn = document.getElementById("plan-arrow-next");
 
@@ -581,13 +555,13 @@ function initFinancialsSection() {
       document.getElementById("future-kicker").textContent = futurePlans.kicker;
       document.getElementById("future-heading").textContent = futurePlans.heading;
       document.getElementById("future-intro-line").textContent = futurePlans.intro;
-      document.getElementById("future-closing").textContent = "\u201C" + futurePlans.closing + "\u201D";
+      document.getElementById("future-closing").textContent = "“" + futurePlans.closing + "”";
 
       total = futurePlans.months.length;
       totalEl.textContent = String(total).padStart(2, "0");
 
       futurePlans.months.forEach(function (month, i) {
-        track.appendChild(buildPlanCard(month, i));
+        track.appendChild(buildPlanCard(month));
         var dot = document.createElement("span");
         dot.className = "story-dot" + (i === 0 ? " is-active" : "");
         dot.addEventListener("click", function () { goTo(i); });
@@ -601,12 +575,11 @@ function initFinancialsSection() {
 
       viewport.addEventListener("wheel", onWheel, { passive: false });
       viewport.addEventListener("keydown", onKeydown);
-      window.addEventListener("keydown", onWindowKeydown);
 
       renderSalesPlanTable();
     }
 
-    function buildPlanCard(month, i) {
+    function buildPlanCard(month) {
       var panel = document.createElement("article");
       panel.className = "story-panel plan-panel";
 
@@ -644,14 +617,14 @@ function initFinancialsSection() {
       var el = document.getElementById("future-sales-table");
       if (!el || typeof fy2627SalesPlan === "undefined") return;
       var rowsHtml = fy2627SalesPlan.rows.map(function (r) {
-  return "<tr><td>" + r.month + "</td><td>" + r.salesPlan + "</td><td>" + r.collectionPlan + "</td></tr>";
-}).join("");
+        return "<tr><td>" + r.month + "</td><td>" + r.salesPlan + "</td><td>" + r.collectionPlan + "</td></tr>";
+      }).join("");
 
-var t = fy2627SalesPlan.totals;
-el.innerHTML =
-"<thead><tr><th>Month</th><th>Sales Plan</th><th>Collection Plan</th></tr></thead>" +
-"<tbody>" + rowsHtml + "</tbody>" +
-"<tfoot><tr><td>Total</td><td>" + t.salesPlan + "</td><td>" + t.collectionPlan + "</td></tr></tfoot>";
+      var t = fy2627SalesPlan.totals;
+      el.innerHTML =
+        "<thead><tr><th>Month</th><th>Sales Plan</th><th>Collection Plan</th></tr></thead>" +
+        "<tbody>" + rowsHtml + "</tbody>" +
+        "<tfoot><tr><td>Total</td><td>" + t.salesPlan + "</td><td>" + t.collectionPlan + "</td></tr></tfoot>";
       document.getElementById("future-narrative").textContent = fy2627SalesPlan.narrative;
     }
 
@@ -674,24 +647,20 @@ el.innerHTML =
 
     function onWheel(e) {
       if (!isActive) return;
-      var h = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-      if (h > 0) { if (next()) e.preventDefault(); }
-      else if (h < 0) { if (prev()) e.preventDefault(); }
+      var horizontalIntent = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (horizontalIntent > 0) {
+        if (next()) e.preventDefault();
+      } else if (horizontalIntent < 0) {
+        if (prev()) e.preventDefault();
+      }
     }
     function onKeydown(e) {
       if (!isActive) return;
       if (e.key === "ArrowRight") { if (next()) e.preventDefault(); }
       else if (e.key === "ArrowLeft") { if (prev()) e.preventDefault(); }
     }
-    function onWindowKeydown(e) {
-      if (document.activeElement === viewport) return;
-      if (!isActive) return;
-      if (e.key === "ArrowRight") { if (next()) e.preventDefault(); }
-      else if (e.key === "ArrowLeft") { if (prev()) e.preventDefault(); }
-    }
     function setActive(val) { isActive = val; }
-
-    return { build: build, setActive: setActive, next: next, prev: prev };
+    return { build: build, setActive: setActive };
   })();
 
   function initPlanActivation() {
@@ -708,91 +677,31 @@ el.innerHTML =
     observer.observe(section);
   }
 
-  /* ===================================================================
-   * PROGRESS RAIL
-   * =================================================================== */
-  function initProgressRail() {
-    var items = document.querySelectorAll(".progress-item");
-    var currentLabel = document.getElementById("progress-current");
-    if (!items.length) return;
-    items.forEach(function (item) {
-      item.addEventListener("click", function () {
-        var target = document.getElementById(item.getAttribute("data-target"));
-        if (target) target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
-      });
-    });
-    var sections = Array.prototype.map.call(items, function (item) {
-      return document.getElementById(item.getAttribute("data-target"));
-    });
-    if (!("IntersectionObserver" in window)) return;
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            var idx = sections.indexOf(entry.target);
-            if (idx === -1) return;
-            items.forEach(function (item, i) {
-              item.classList.toggle("is-active", i === idx);
-            });
-            if (currentLabel) currentLabel.textContent = String(idx + 1).padStart(2, "0");
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    sections.forEach(function (s) { if (s) observer.observe(s); });
-  }
-  /* ===================================================================
-   * HERO MEDIA
-   * =================================================================== */
-  function initHeroMedia() {
-    var media = document.getElementById("hero-media");
-    if (!media || typeof imageSources === "undefined") return;
-    if (imageSources.hero) {
-      var img = new Image();
-      img.onload = function () {
-        media.style.backgroundImage =
-          "linear-gradient(180deg, rgba(14,11,7,0.10) 0%, rgba(10,8,5,0.48) 55%, rgba(6,5,3,0.94) 100%), url('" +
-          imageSources.hero + "')";
-        media.classList.add("has-image");
-      };
-      img.onerror = function () {
-        // Photo failed to load (bad path/case, or not committed yet) —
-        // keep the dark gradient fallback rather than showing nothing.
-        console.warn("Hero image failed to load:", imageSources.hero);
-      };
-      img.src = imageSources.hero;
+  function initHero() {
+    var mediaEl = document.getElementById("hero-media");
+    var logoImg = document.getElementById("brand-logo-img");
+    if (typeof imageSources !== "undefined") {
+      if (imageSources.hero && mediaEl) {
+        mediaEl.style.setProperty("--hero-image-url", 'url("' + imageSources.hero + '")');
+        mediaEl.classList.add("has-image");
+      }
+      if (imageSources.logo && logoImg) {
+        logoImg.src = imageSources.logo;
+        logoImg.addEventListener("load", function () { logoImg.classList.add("is-loaded"); });
+      }
     }
   }
-  function initIntroSplash() {
-  var splash = document.getElementById("intro-splash");
-  if (!splash) return;
-  if (prefersReducedMotion) { splash.remove(); return; }
-  setTimeout(function () { splash.remove(); }, 2600);
-}
-  function initBrandLogo() {
-    var img = document.getElementById("brand-logo-img");
-    if (!img || typeof imageSources === "undefined" || !imageSources.logo) return;
-    img.addEventListener("load", function () { img.classList.add("is-loaded"); });
-    img.addEventListener("error", function () { img.classList.remove("is-loaded"); });
-    img.src = imageSources.logo;
-  }
-  /* ===================================================================
-   * INIT
-   * =================================================================== */
+
   document.addEventListener("DOMContentLoaded", function () {
-    initIntroSplash();
-    initHeroMedia();
-    initBrandLogo();
+    initHero();
+    initRevealObserver();
     initSystemsSection();
     initSalesSection();
     initCurrentSection();
-    initFinancialsSection(); 
-    StoryController.build();
-    initStoriesActivation();
+    initFinancialsSection();
     PlanController.build();
     initPlanActivation();
-    initProgressRail();
-    initRevealObserver();
+    StoryController.build();
+    initStoriesActivation();
   });
 })();
