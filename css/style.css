@@ -655,7 +655,7 @@ button { font: inherit; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 42px clamp(72px, 10vw, 140px);
+  padding: 56px clamp(80px, 10vw, 140px);
   margin: 0;
   position: relative;
 }
@@ -663,7 +663,7 @@ button { font: inherit; }
 .plan-panel::after {
   content: "";
   position: absolute;
-  inset: 24px clamp(32px, 6vw, 90px);
+  inset: 28px clamp(40px, 6vw, 90px);
   border: 1px solid rgba(35, 41, 32, 0.12);
   border-radius: 28px;
   background: rgba(255, 255, 255, 0.42);
@@ -675,7 +675,7 @@ button { font: inherit; }
 
 .plan-panel > * {
   width: 100%;
-  max-width: 760px;
+  max-width: 720px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
