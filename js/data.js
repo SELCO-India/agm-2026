@@ -188,8 +188,8 @@ const stories = [
     year: "2026",
     description:
       "A 25 kW on-grid solar system now powers the kitchen and cafeteria at this Bengaluru cable-and-harness manufacturer, generating an estimated 36,500 kWh a year and reducing CO₂ emissions by an estimated 29.2 tons annually.",
-    image: "",
-    imageSecondary: "",
+    image: "assets/ixon.png",
+    imageSecondary: "assets/ixon.png",
     metric: "29.2 tons CO₂ reduced per year",
     quote: "",
   },
@@ -248,8 +248,8 @@ const stories = [
   year: "2026",
   description:
     "Solar lighting reached nearly 100 households in Gosaladoddi, extending study and work hours after sunset. The shift also opened a path to income \u2014 five women pursued PMFME-backed loans for solar-powered livelihood machines, and the first, a roti-making unit, is now producing 800\u20131,000 rotis a day.",
-  image: "",
-  imageSecondary: "",
+  image: "assets/koppal.jpeg",
+  imageSecondary: "assets/koppal.jpeg",
   metric: "~100 households lit; 800\u20131,000 rotis/day from the first unit",
   quote: "",
 },
