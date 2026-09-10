@@ -399,18 +399,18 @@ const futurePlans = {
 
 const fy2627SalesPlan = {
   rows: [
-    { month: "Sep-26", achieved: 6, plan: 6 },
-    { month: "Oct-26", achieved: 8, plan: 8 },
-    { month: "Nov-26", achieved: 7, plan: 8 },
-    { month: "Dec-26", achieved: 8, plan: 9 },
-    { month: "Jan-27", achieved: 7, plan: 8 },
-    { month: "Feb-27", achieved: 6, plan: 6 },
-    { month: "Mar-27", achieved: 11, plan: 8 },
+    { month: "Sep-26", salesPlan: 6, collectionPlan: 6 },
+    { month: "Oct-26", salesPlan: 8, collectionPlan: 8 },
+    { month: "Nov-26", salesPlan: 7, collectionPlan: 8 },
+    { month: "Dec-26", salesPlan: 8, collectionPlan: 9 },
+    { month: "Jan-27", salesPlan: 7, collectionPlan: 8 },
+    { month: "Feb-27", salesPlan: 6, collectionPlan: 6 },
+    { month: "Mar-27", salesPlan: 11, collectionPlan: 8 },
   ],
+  totals: { salesPlan: 53, collectionPlan: 53 },
   // NOTE: your "Sales Achieved" total (20.83) doesn't match the sum of
   // the monthly figures above (53) — flagged this earlier and used your
   // numbers as given. Correct whichever is right and update this line.
-  totals: { target: 53, achieved: 53, plan: 53 },
   narrative:
     "We’re targeting up to ₹53 Cr by March 2027, and are confident of delivering at least ₹47+ Cr. Expecting 1.5x Collection respect to 1x sales every month",
 };
