@@ -950,10 +950,114 @@ button { font: inherit; }
    FOOTER
 --------------------------------------------------------------------- */
 .site-footer {
-  padding: 48px var(--gutter) 64px;
-  font-size: 12px;
-  color: var(--ink-45);
+  padding: 80px var(--gutter) 32px;
+  font-size: 13px;
+  color: var(--ink-70);
   border-top: 1px solid var(--line);
+}
+
+.footer-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: clamp(40px, 7vw, 100px);
+}
+
+.footer-logo {
+  width: 110px;
+  height: auto;
+  display: block;
+  margin-bottom: 22px;
+}
+
+.footer-company {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.25;
+  color: var(--ink);
+  max-width: 280px;
+}
+
+.footer-address p {
+  line-height: 1.7;
+  color: var(--ink-70);
+}
+
+.footer-phone {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-phone a {
+  font-family: var(--font-display);
+  font-size: 21px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.footer-phone span {
+  font-size: 11px;
+  color: var(--ink-45);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: var(--ink-70);
+  text-decoration: none;
+
+  transition:
+    color var(--dur-fast) ease,
+    transform var(--dur-fast) ease;
+}
+
+.footer-social a:hover {
+  color: var(--ink);
+  transform: translateX(4px);
+}
+
+.footer-social-icon {
+  width: 28px;
+  height: 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--line);
+  border-radius: 50%;
+
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.footer-bottom {
+  max-width: 1180px;
+  margin: 64px auto 0;
+  padding-top: 20px;
+
+  border-top: 1px solid var(--line);
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  font-size: 11px;
+  color: var(--ink-45);
 }
 /* ---------------------------------------------------------------------
    RESPONSIVE — smaller laptops / tablets / phones
