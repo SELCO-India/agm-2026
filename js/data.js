@@ -121,7 +121,7 @@ const fy2627Current = {
   { label: "AMC", value: "₹4.52 L" },
   { label: "Spare", value: "₹63.85 L" },
   { label: "Service Bill", value: "₹1.17 Cr" }
-];
+],
   systemsBifurcation: [
     { name: "Basic Energy – Small", value: 177 },
     { name: "Basic Energy – Medium", value: 615 },
