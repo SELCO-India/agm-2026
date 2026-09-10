@@ -176,7 +176,7 @@ const stories = [
     year: "2026",
     description:
       "A hybrid solar system — 35 kW of panels, a 30 kW hybrid inverter and a 20 kW heat pump — now supports daily prayers and temple operations, generating an estimated 45,600 kWh a year and an average annual saving of ₹3.4–3.8 lakh on electricity.",
-    image: "",
+    image: "assets/Bade hanuman.png",
     imageSecondary: "",
     metric: "₹3.4–3.8 lakh saved annually",
     quote: "",
