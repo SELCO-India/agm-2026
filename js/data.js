@@ -205,7 +205,22 @@ const financialsSummary = {
   trends: [
     { name: "Fixed Cost", currentValue: 47855998, previousLabel: "Apr–Aug 2025", previousValue: 83453849, changePct: -42.66 },
     { name: "Fixed Deposits", currentValue: 250748813, previousLabel: "As on Aug 2025", previousValue: 222674883, changePct: 12.61 },
-    { name: "Liquid Investments", currentValue: 10156957, previousLabel: "As on Aug 2025", previousValue: 21512417, changePct: -52.79 },
+    {
+      name: "Revenue per Employee",
+      currentValue: 989292,
+      currentDisplay: "₹9.89 Lakhs",
+      subtleDisplay: "(€8.91k / $10.35k)",
+      previousLabel: "Apr–Aug 2025",
+      previousValue: 560929,
+      previousDisplay: "₹5.61 Lakhs",
+      changePct: 76.37,
+      isCurrency: true,
+      contextNote: "Avg headcount reduced from 437 to 211 (-51.72%)",
+      headcount: {
+        current: 211,
+        previous: 437,
+        changePct: -51.72
+      },
   ],
 };
 
