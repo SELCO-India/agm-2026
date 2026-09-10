@@ -973,9 +973,9 @@ button { font: inherit; }
    FOOTER
 --------------------------------------------------------------------- */
 .site-footer {
-  padding: 80px var(--gutter) 32px;
-  font-size: 13px;
-  color: var(--ink-70);
+  padding: 32px var(--gutter) 36px;
+  font-size: 12px;
+  color: var(--ink-45);
   border-top: 1px solid var(--line);
 }
 
