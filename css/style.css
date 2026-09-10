@@ -261,7 +261,7 @@ button { font: inherit; }
   font-weight: 500;
   font-size: clamp(26px, 3.4vw, 38px);
   line-height: 1.18;
-  max-width: 22ch;
+  max-width: 30ch;
   color: var(--ink);
 }
 .narrative-line {
@@ -805,6 +805,11 @@ button { font: inherit; }
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+
+#section-stories .narrative-line {
+  max-width: 70ch;
+  margin-top: 18px;
 }
 
 #section-future .story-arrow {
