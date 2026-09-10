@@ -106,8 +106,8 @@ const fy2526Sales = {
  * add rows here later without touching any other file.
  * -------------------------------------------------------------------- */
 const fy2627Current = {
-  totalSalesDisplay: "₹20.66 Cr",
-  totalSalesExact: 206600000, // approximate — replace with exact figure when available
+  totalSalesDisplay: "₹20.87 Cr",
+  totalSalesExact: 208700000, // approximate — replace with exact figure when available
   systemsDisplay: "3K",
   asOfLabel: "So far this year",
   salesBifurcation: [
@@ -399,18 +399,18 @@ const futurePlans = {
 
 const fy2627SalesPlan = {
   rows: [
-    { month: "Sep-26", target: 6.14, achieved: 6, plan: 6 },
-    { month: "Oct-26", target: 6.18, achieved: 8, plan: 8 },
-    { month: "Nov-26", target: 6.25, achieved: 7, plan: 8 },
-    { month: "Dec-26", target: 6.4, achieved: 8, plan: 9 },
-    { month: "Jan-27", target: 6.48, achieved: 7, plan: 8 },
-    { month: "Feb-27", target: 6.56, achieved: 6, plan: 6 },
-    { month: "Mar-27", target: 9.39, achieved: 11, plan: 8 },
+    { month: "Sep-26", achieved: 6, plan: 6 },
+    { month: "Oct-26", achieved: 8, plan: 8 },
+    { month: "Nov-26", achieved: 7, plan: 8 },
+    { month: "Dec-26", achieved: 8, plan: 9 },
+    { month: "Jan-27", achieved: 7, plan: 8 },
+    { month: "Feb-27", achieved: 6, plan: 6 },
+    { month: "Mar-27", achieved: 11, plan: 8 },
   ],
   // NOTE: your "Sales Achieved" total (20.83) doesn't match the sum of
   // the monthly figures above (53) — flagged this earlier and used your
   // numbers as given. Correct whichever is right and update this line.
-  totals: { target: 47.4, achieved: 20.83, plan: 53 },
+  totals: { target: 53, achieved: 53, plan: 53 },
   narrative:
-    "We’re targeting up to ₹53 Cr by March 2027, and are confident of delivering at least ₹47+ Cr.",
+    "We’re targeting up to ₹53 Cr by March 2027, and are confident of delivering at least ₹47+ Cr. Expecting 1.5x Collection respect to 1x sales every month",
 };
