@@ -220,6 +220,7 @@ const financialsSummary = {
         current: 211,
         previous: 437,
         changePct: -51.72
+      }
       },
   ],
 };
