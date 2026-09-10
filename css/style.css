@@ -793,8 +793,11 @@ button { font: inherit; }
 }
 .story-viewport {
   margin-top: clamp(48px, 8vh, 80px);
+  width: 100%;
+  max-width: 100%;
   overflow: hidden;
   position: relative;
+  box-sizing: border-box;
 }
 .story-track {
   display: flex;
