@@ -1,5 +1,6 @@
 /**
  * AGM 2026 — DATA
+ * Exchange Rates: 1 EUR = ₹110.97 | 1 USD = ₹95.62
  */
 
 const imageSources = {
@@ -31,7 +32,7 @@ const fy2526Systems = {
 const fy2526Sales = {
   totalExact: 680694351.13,
   totalDisplay: "₹68.07 Cr",
-  totalSubtleDisplay: "(€7.56M / $8.20M)",
+  totalSubtleDisplay: "(€6.13M / $7.12M)",
   categories: [
     { name: "AMC", value: 3290770.73 },
     { name: "Education", value: 14544474.13 },
@@ -50,7 +51,7 @@ const fy2526Sales = {
  * -------------------------------------------------------------------- */
 const fy2627Current = {
   totalSalesDisplay: "₹20.87 Cr",
-  totalSalesSubtleDisplay: "(€2.32M / $2.51M)",
+  totalSalesSubtleDisplay: "(€1.88M / $2.18M)",
   totalSalesExact: 208700000,
   systemsDisplay: "3K",
   asOfLabel: "So far this year",
@@ -105,7 +106,7 @@ const stories = [
     year: "2026",
     description: "A hybrid solar system — 35 kW of panels, a 30 kW hybrid inverter and a 20 kW heat pump — now supports daily prayers and temple operations, generating an estimated 45,600 kWh a year and an average annual saving of ₹3.4–3.8 lakh on electricity.",
     image: "assets/Bade hanuman.png",
-    metric: "₹3.4–3.8 lakh (€3.7k–4.2k / $4.1k–4.5k) saved annually",
+    metric: "₹3.4–3.8 lakh (€3.06k–3.42k / $3.56k–3.97k) saved annually",
   },
   {
     title: "Axon Interconnectors & Wires Pvt. Ltd.",
@@ -139,7 +140,7 @@ const stories = [
     category: "Education",
     location: "Kolnad, Manchi, Bantwal, Dakshina Kannada, Karnataka",
     year: "2026",
-    description: "Building on its earlier SELCO solar-powered smart classroom system, Government High School Manchi–Kolnad added a 6 kW solar off-grid system on 31 July 2026, funded through the MRPL CSR Fund at a cost of ₹4,90,000 (€5,444 / $5,903). Computers, lights and fans now keep running through power outages, and the school's electricity bills have dropped.",
+    description: "Building on its earlier SELCO solar-powered smart classroom system, Government High School Manchi–Kolnad added a 6 kW solar off-grid system on 31 July 2026, funded through the MRPL CSR Fund at a cost of ₹4,90,000 (€4,416 / $5,124). Computers, lights and fans now keep running through power outages, and the school's electricity bills have dropped.",
     image: "assets/school.png",
     metric: "6 kW system, funded via MRPL CSR",
   },
@@ -168,7 +169,7 @@ const stories = [
     year: "2026",
     description: "A dental clinic's existing 3 kWp solar setup was expanded into an 8 kWp single-phase hybrid system with 10 kWh of lithium battery storage, configured for zero grid export. Solar covers the clinic's loads first, the battery fills the gaps, and the grid steps in only when needed — engineered around a 3 kW sanctioned load per meter.",
     image: "assets/Banner.png",
-    metric: "8 kWp hybrid + 10 kWh lithium, ₹7.25 lakh (€8.05k / $8.73k)",
+    metric: "8 kWp hybrid + 10 kWh lithium, ₹7.25 lakh (€6.53k / $7.58k)",
   },
 ];
 
@@ -220,8 +221,8 @@ const futurePlans = {
     {
       label: "Sep 2026",
       theme: "Reset the business engine",
-      salesRevenue: "₹6 Cr (€667k / $723k)",
-      collections: "₹6 Cr (€667k / $723k)",
+      salesRevenue: "₹6 Cr (€541k / $627k)",
+      collections: "₹6 Cr (€541k / $627k)",
       actions: [
         "Review debtors’ receivables and assign collection owners",
         "Train sales teams on solution-based selling",
@@ -231,8 +232,8 @@ const futurePlans = {
     {
       label: "Oct 2026",
       theme: "Build the pipeline",
-      salesRevenue: "₹8 Cr (€889k / $964k)",
-      collections: "₹8 Cr (€889k / $964k)",
+      salesRevenue: "₹8 Cr (€721k / $837k)",
+      collections: "₹8 Cr (€721k / $837k)",
       actions: [
         "Publish a weekly branch scorecard",
         "Conduct livelihood customer camps",
@@ -243,8 +244,8 @@ const futurePlans = {
     {
       label: "Nov 2026",
       theme: "Close institutional demand",
-      salesRevenue: "₹7 Cr (€778k / $843k)",
-      collections: "₹8 Cr (€889k / $964k)",
+      salesRevenue: "₹7 Cr (€631k / $732k)",
+      collections: "₹8 Cr (€721k / $837k)",
       actions: [
         "Submit proposals to schools, healthcare and community institutions",
         "Convert pilot projects into repeat orders",
@@ -254,8 +255,8 @@ const futurePlans = {
     {
       label: "Dec 2026",
       theme: "Mobilise & accelerate",
-      salesRevenue: "₹8 Cr (€889k / $964k)",
-      collections: "₹9 Cr (€1.0M / $1.08M)",
+      salesRevenue: "₹8 Cr (€721k / $837k)",
+      collections: "₹9 Cr (€811k / $941k)",
       actions: [
         "Audit all branches: sales, backlog, receivables, service",
         "Increase installation capacity for winning products",
@@ -265,8 +266,8 @@ const futurePlans = {
     {
       label: "Jan 2027",
       theme: "Build volume",
-      salesRevenue: "₹7 Cr (€778k / $843k)",
-      collections: "₹8 Cr (€889k / $964k)",
+      salesRevenue: "₹7 Cr (€631k / $732k)",
+      collections: "₹8 Cr (€721k / $837k)",
       actions: [
         "Launch service-renewal drives",
         "Weekly lead-generation campaigns",
@@ -275,8 +276,8 @@ const futurePlans = {
     {
       label: "Feb 2027",
       theme: "Reset the business engine",
-      salesRevenue: "₹6 Cr (€667k / $723k)",
-      collections: "₹6 Cr (€667k / $723k)",
+      salesRevenue: "₹6 Cr (€541k / $627k)",
+      collections: "₹6 Cr (€541k / $627k)",
       actions: [
         "Double down on the highest-converting branches and segments",
         "Improve repeat orders and cross-selling",
@@ -287,8 +288,8 @@ const futurePlans = {
     {
       label: "Mar 2027",
       theme: "Deliver & collect",
-      salesRevenue: "₹11 Cr (€1.22M / $1.33M)",
-      collections: "₹8 Cr (€889k / $964k)",
+      salesRevenue: "₹11 Cr (€991k / $1.15M)",
+      collections: "₹8 Cr (€721k / $837k)",
       actions: [
         "Complete priority installations",
         "Conduct daily collections and dispatch reviews",
@@ -302,14 +303,14 @@ const futurePlans = {
 
 const fy2627SalesPlan = {
   rows: [
-    { month: "Sep-26", salesPlan: "₹6 Cr (€667k / $723k)", collectionPlan: "₹6 Cr (€667k / $723k)" },
-    { month: "Oct-26", salesPlan: "₹8 Cr (€889k / $964k)", collectionPlan: "₹8 Cr (€889k / $964k)" },
-    { month: "Nov-26", salesPlan: "₹7 Cr (€778k / $843k)", collectionPlan: "₹8 Cr (€889k / $964k)" },
-    { month: "Dec-26", salesPlan: "₹8 Cr (€889k / $964k)", collectionPlan: "₹9 Cr (€1.0M / $1.08M)" },
-    { month: "Jan-27", salesPlan: "₹7 Cr (€778k / $843k)", collectionPlan: "₹8 Cr (€889k / $964k)" },
-    { month: "Feb-27", salesPlan: "₹6 Cr (€667k / $723k)", collectionPlan: "₹6 Cr (€667k / $723k)" },
-    { month: "Mar-27", salesPlan: "₹11 Cr (€1.22M / $1.33M)", collectionPlan: "₹8 Cr (€889k / $964k)" },
+    { month: "Sep-26", salesPlan: "₹6 Cr (€541k / $627k)", collectionPlan: "₹6 Cr (€541k / $627k)" },
+    { month: "Oct-26", salesPlan: "₹8 Cr (€721k / $837k)", collectionPlan: "₹8 Cr (€721k / $837k)" },
+    { month: "Nov-26", salesPlan: "₹7 Cr (€631k / $732k)", collectionPlan: "₹8 Cr (€721k / $837k)" },
+    { month: "Dec-26", salesPlan: "₹8 Cr (€721k / $837k)", collectionPlan: "₹9 Cr (€811k / $941k)" },
+    { month: "Jan-27", salesPlan: "₹7 Cr (€631k / $732k)", collectionPlan: "₹8 Cr (€721k / $837k)" },
+    { month: "Feb-27", salesPlan: "₹6 Cr (€541k / $627k)", collectionPlan: "₹6 Cr (€541k / $627k)" },
+    { month: "Mar-27", salesPlan: "₹11 Cr (€991k / $1.15M)", collectionPlan: "₹8 Cr (€721k / $837k)" },
   ],
-  totals: { salesPlan: "₹53 Cr (€5.89M / $6.39M)", collectionPlan: "₹53 Cr (€5.89M / $6.39M)" },
-  narrative: "We’re targeting up to ₹53 Cr (€5.89M / $6.39M) by March 2027, and are confident of delivering at least ₹47+ Cr (€5.22M+ / $5.66M+). Expecting 1.5x Collection respect to 1x sales every month",
+  totals: { salesPlan: "₹53 Cr (€4.78M / $5.54M)", collectionPlan: "₹53 Cr (€4.78M / $5.54M)" },
+  narrative: "We’re targeting up to ₹53 Cr (€4.78M / $5.54M) by March 2027, and are confident of delivering at least ₹47+ Cr (€4.24M+ / $4.91M+). Expecting 1.5x Collection respect to 1x sales every month",
 };
