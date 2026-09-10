@@ -655,7 +655,7 @@ button { font: inherit; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 56px clamp(80px, 10vw, 140px);
+  padding: 64px clamp(90px, 12vw, 160px);
   margin: 0;
   position: relative;
 }
@@ -688,6 +688,7 @@ button { font: inherit; }
   color: var(--ink-45);
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  margin-bottom: 12px;
 }
 .plan-theme {
   margin-top: 0;
@@ -701,7 +702,7 @@ button { font: inherit; }
 .plan-stats {
   display: flex;
   gap: clamp(24px, 4vw, 56px);
-  margin-top: 30px;
+  margin-top: 22px;
 }
 .plan-stat-label {
   font-size: 12px;
@@ -718,12 +719,12 @@ button { font: inherit; }
   line-height: 1;
 }
 .plan-actions {
-  margin-top: 26px;
-  padding-top: 20px;
+  margin-top: 24px;
+  padding-top: 18px;
   border-top: 1px solid var(--line);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 }
 .plan-action {
   font-size: 14px;
