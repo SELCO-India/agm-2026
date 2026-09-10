@@ -792,6 +792,7 @@ el.innerHTML =
     initStoriesActivation();
     PlanController.build();
     initPlanActivation();
+    initProgressRail();
     initRevealObserver();
   });
 })();
