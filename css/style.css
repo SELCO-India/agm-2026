@@ -14,7 +14,7 @@
    Type
    ----
    Display: "Fraunces" (serif, optical sizing) — numbers & headlines
-   Body:    "Inter"                              — everything else
+   Body:    "Inter"                               — everything else
    ===================================================================== */
 :root {
   --paper: #FAF8F2;
@@ -38,6 +38,7 @@
   --dur-med: 650ms;
   --dur-fast: 350ms;
 }
+
 /* ---------------------------------------------------------------------
    INTRO SPLASH
 --------------------------------------------------------------------- */
@@ -70,6 +71,7 @@
 @media (prefers-reduced-motion: reduce) {
   .intro-splash { display: none; }
 }
+
 /* ---------------------------------------------------------------------
    RESET
 --------------------------------------------------------------------- */
@@ -102,6 +104,7 @@ button { font: inherit; }
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
+
 /* ---------------------------------------------------------------------
    BRAND LOGO
 --------------------------------------------------------------------- */
@@ -119,11 +122,12 @@ button { font: inherit; }
   width: auto;
   max-width: 160px;
   object-fit: contain;
-  display: none; /* shown once a real logo URL loads successfully */
+  display: none;
 }
 .brand-logo img.is-loaded { display: block; }
+
 /* ---------------------------------------------------------------------
-   TOP NAVBAR
+   TOP NAVBAR (UPDATED FOR RESPONSIVENESS & GLASSMORPHISM)
 --------------------------------------------------------------------- */
 .top-navbar {
   position: fixed;
@@ -133,10 +137,12 @@ button { font: inherit; }
   z-index: 55;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(20px, 4vw, 48px);
-  padding: 18px clamp(24px, 6vw, 96px);
-  background: linear-gradient(180deg, rgba(9,7,5,0.55) 0%, rgba(9,7,5,0) 100%);
+  justify-content: flex-end;
+  padding: 14px clamp(16px, 4vw, 40px);
+  background: rgba(10, 8, 5, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .navbar-brand {
   position: absolute;
@@ -146,14 +152,21 @@ button { font: inherit; }
   font-size: 15px;
   color: var(--red-orange);
   letter-spacing: 0.02em;
-  opacity: 0; /* the fixed logo already sits here — remove this line if you'd rather show text instead */
+  opacity: 0;
 }
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: clamp(18px, 3vw, 36px);
+  gap: clamp(12px, 2vw, 28px);
   margin: 0;
   padding: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.navbar-links::-webkit-scrollbar {
+  display: none;
 }
 .navbar-link {
   font-family: var(--font-body);
@@ -162,8 +175,8 @@ button { font: inherit; }
   letter-spacing: 0.01em;
   color: rgba(250, 248, 242, 0.75);
   text-decoration: none;
-  padding: 4px 0;
-  border-bottom: 1px solid transparent;
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
   transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease;
 }
 .navbar-link:hover { color: #F7F3E9; }
@@ -171,12 +184,23 @@ button { font: inherit; }
   color: #F7F3E9;
   border-bottom-color: var(--red-orange);
 }
-/* the dot-rail's own ::after dot shouldn't render on navbar links */
 .navbar-link.progress-item::after { display: none; }
+
 @media (max-width: 720px) {
-  .navbar-links { gap: 14px; }
-  .navbar-link { font-size: 11px; }
+  .top-navbar {
+    padding: 10px 16px;
+    justify-content: center;
+  }
+  .navbar-links {
+    gap: 16px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .navbar-link {
+    font-size: 12px;
+  }
 }
+
 /* ---------------------------------------------------------------------
    PROGRESS RAIL
 --------------------------------------------------------------------- */
@@ -238,6 +262,7 @@ button { font: inherit; }
 @media (max-width: 720px) {
   .progress-rail { display: none; }
 }
+
 /* ---------------------------------------------------------------------
    SECTION SCAFFOLD
 --------------------------------------------------------------------- */
@@ -273,7 +298,6 @@ button { font: inherit; }
   max-width: var(--measure);
   margin-top: 28px;
 }
-/* Reveal-on-scroll: base state, .is-visible applied by app.js */
 .reveal-block {
   opacity: 0;
   transform: translateY(18px);
@@ -286,6 +310,7 @@ button { font: inherit; }
   .reveal-block { opacity: 1; transform: none; transition: none; }
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
+
 /* ---------------------------------------------------------------------
    01 — HERO
 --------------------------------------------------------------------- */
@@ -311,7 +336,6 @@ button { font: inherit; }
     linear-gradient(180deg, rgba(14,11,7,0.10) 0%, rgba(10,8,5,0.48) 55%, rgba(6,5,3,0.94) 100%),
     var(--hero-image-url);
 }
-/* subtle horizon + sun suggestion when no photo is supplied yet */
 .hero-media::after {
   content: "";
   position: absolute;
@@ -396,8 +420,9 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .scroll-cue-line::after { animation: none; top: 100%; }
 }
+
 /* ---------------------------------------------------------------------
-   02 / 03 — COUNTER STAGE (shared by systems + sales)
+   02 / 03 — COUNTER STAGE
 --------------------------------------------------------------------- */
 .counter-stage {
   margin-top: clamp(40px, 8vh, 80px);
@@ -421,6 +446,7 @@ button { font: inherit; }
   color: var(--ink-45);
   font-weight: 500;
 }
+
 /* ---------------------------------------------------------------------
    BREAKDOWN — proportional bars
 --------------------------------------------------------------------- */
@@ -531,6 +557,7 @@ button { font: inherit; }
   min-width: 6.5ch;
   text-align: right;
 }
+
 /* ---------------------------------------------------------------------
    04 — CURRENT MOMENTUM / MILESTONES
 --------------------------------------------------------------------- */
@@ -644,104 +671,124 @@ button { font: inherit; }
 .trend-delta.is-down { color: var(--gold); }
 
 /* ---------------------------------------------------------------------
-   FUTURE PLANS — MONTH CARDS + SALES TABLE
+   FUTURE PLANS — APPLE-STYLE CARDS + TABLES
 --------------------------------------------------------------------- */
 .plan-panel {
   flex: 0 0 100%;
   width: 100%;
   max-width: none;
-  min-height: 58vh;
+  min-height: 60vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 64px clamp(90px, 12vw, 160px);
+  padding: clamp(32px, 6vw, 64px) clamp(20px, 5vw, 60px);
   margin: 0;
   position: relative;
 }
 
+/* Apple-style Glassmorphic Card Frame */
 .plan-panel::after {
   content: "";
   position: absolute;
-  inset: 28px clamp(40px, 6vw, 90px);
-  border: 1px solid rgba(35, 41, 32, 0.12);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.42);
-  box-shadow:
-    0 18px 50px rgba(35, 41, 32, 0.06),
-    0 2px 8px rgba(35, 41, 32, 0.03);
+  inset: 12px clamp(12px, 3vw, 40px);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 20px 40px -15px rgba(35, 41, 32, 0.06),
+    0 0 0 1px rgba(35, 41, 32, 0.03);
   pointer-events: none;
 }
 
 .plan-panel > * {
   width: 100%;
-  max-width: 720px;
+  max-width: 680px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   z-index: 1;
 }
+
 .plan-month-label {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 12px;
-  color: var(--ink-45);
-  letter-spacing: 0.12em;
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
+
 .plan-theme {
   margin-top: 0;
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 600;
+  font-size: clamp(24px, 3.5vw, 40px);
   color: var(--ink);
-  line-height: 1.08;
-  max-width: 650px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
+
+/* Key Metrics Grid */
 .plan-stats {
-  display: flex;
-  gap: clamp(24px, 4vw, 56px);
-  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(35, 41, 32, 0.06);
 }
+
 .plan-stat-label {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--ink-45);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-.plan-stat-value {
-  margin-top: 6px;
-  font-family: var(--font-display);
-  font-size: clamp(28px, 3.2vw, 38px);
+  letter-spacing: 0.06em;
   font-weight: 500;
+}
+
+.plan-stat-value {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 600;
   color: var(--gold);
   line-height: 1;
 }
+
+/* Actions List */
 .plan-actions {
-  margin-top: 24px;
-  padding-top: 18px;
+  margin-top: 20px;
+  padding-top: 16px;
   border-top: 1px solid var(--line);
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 10px;
 }
+
 .plan-action {
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--ink-70);
-  padding-left: 18px;
+  padding-left: 20px;
   position: relative;
+  font-weight: 400;
 }
+
 .plan-action::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 9px;
-  width: 5px;
-  height: 5px;
+  left: 2px;
+  top: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: var(--green);
+  background: var(--gold);
 }
 
 .plan-table-wrap {
@@ -753,6 +800,7 @@ button { font: inherit; }
   overflow-x: auto;
   box-sizing: border-box;
 }
+
 .plan-table {
   width: 100%;
   max-width: 880px;
@@ -760,13 +808,16 @@ button { font: inherit; }
   font-size: 13px;
   margin: 0 auto;
 }
+
 .plan-table th, .plan-table td {
   padding: 10px 14px;
   text-align: right;
   border-bottom: 1px solid var(--line);
   font-variant-numeric: tabular-nums;
 }
+
 .plan-table th:first-child, .plan-table td:first-child { text-align: left; }
+
 .plan-table thead th {
   font-weight: 600;
   color: var(--ink-45);
@@ -774,13 +825,16 @@ button { font: inherit; }
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
+
 .plan-table tbody td { color: var(--ink-70); }
+
 .plan-table tfoot td {
   font-weight: 600;
   color: var(--ink);
   border-top: 1px solid var(--ink-20);
   border-bottom: none;
 }
+
 /* ---------------------------------------------------------------------
    05 — STORIES
 --------------------------------------------------------------------- */
@@ -873,6 +927,7 @@ button { font: inherit; }
 @media (max-width: 720px) {
   .story-arrow { width: 38px; height: 38px; }
 }
+
 .story-panel {
   flex: 0 0 100%;
   width: 100%;
@@ -976,6 +1031,7 @@ button { font: inherit; }
   font-size: 13px;
   color: var(--ink-45);
 }
+
 @media (max-width: 860px) {
   .story-panel, .story-panel:nth-child(even) {
     grid-template-columns: 1fr;
@@ -985,6 +1041,7 @@ button { font: inherit; }
   .story-panel:nth-child(even) .story-copy { order: unset; }
   .story-media { aspect-ratio: 16/10; }
 }
+
 /* ---------------------------------------------------------------------
    FOOTER
 --------------------------------------------------------------------- */
@@ -998,7 +1055,6 @@ button { font: inherit; }
 .footer-inner {
   max-width: 1180px;
   margin: 0 auto;
-
   display: grid;
   grid-template-columns: 1.2fr 1fr 1fr;
   gap: clamp(40px, 7vw, 100px);
@@ -1055,13 +1111,9 @@ button { font: inherit; }
   display: flex;
   align-items: center;
   gap: 12px;
-
   color: var(--ink-70);
   text-decoration: none;
-
-  transition:
-    color var(--dur-fast) ease,
-    transform var(--dur-fast) ease;
+  transition: color var(--dur-fast) ease, transform var(--dur-fast) ease;
 }
 
 .footer-social a:hover {
@@ -1072,14 +1124,11 @@ button { font: inherit; }
 .footer-social-icon {
   width: 28px;
   height: 28px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   border: 1px solid var(--line);
   border-radius: 50%;
-
   font-size: 13px;
   color: var(--ink);
 }
@@ -1088,45 +1137,17 @@ button { font: inherit; }
   max-width: 1180px;
   margin: 64px auto 0;
   padding-top: 20px;
-
   border-top: 1px solid var(--line);
-
   display: flex;
   justify-content: space-between;
   gap: 20px;
-
   font-size: 11px;
   color: var(--ink-45);
 }
+
 /* ---------------------------------------------------------------------
-   RESPONSIVE — smaller laptops / tablets / phones
+   RESPONSIVE OVERRIDES & MEDIA QUERIES
 --------------------------------------------------------------------- */
-@media (max-width: 640px) {
-  .section { padding-top: 96px; padding-bottom: 96px; }
-  .breakdown-row {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-   .plan-panel {
-  padding-left: 52px;
-  padding-right: 52px;
-}
-
-.plan-theme {
-  font-size: 30px;
-}
-
-.plan-stats {
-  gap: 24px;
-}
-
-.plan-action {
-  font-size: 13px;
-}
-  .breakdown-value { text-align: left; }
-  .milestones { gap: 36px; }
-}
-
 @media (max-width: 760px) {
   .footer-inner {
     grid-template-columns: 1fr;
@@ -1142,55 +1163,42 @@ button { font: inherit; }
     width: 44px;
     height: 44px;
   }
-
-  .plan-panel {
-    padding-left: 64px;
-    padding-right: 64px;
-  }
 }
 
+@media (max-width: 640px) {
+  .section { 
+    padding-top: 96px; 
+    padding-bottom: 96px; 
+  }
+  
+  .breakdown-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 
-@media (max-width: 720px) {
+  .breakdown-value { text-align: left; }
+  .milestones { gap: 36px; }
+
   .plan-panel {
+    padding: 32px 24px;
     min-height: auto;
-    padding: 52px 52px;
   }
 
   .plan-panel::after {
-    inset: 20px 18px;
-    border-radius: 22px;
-  }
-
-  .plan-panel > * {
-    max-width: 100%;
-  }
-
-  .plan-month-label {
-    font-size: 11px;
-  }
-
-  .plan-theme {
-    font-size: clamp(26px, 8vw, 34px);
-    line-height: 1.1;
+    inset: 8px;
+    border-radius: 18px;
   }
 
   .plan-stats {
-    gap: 28px;
-    margin-top: 24px;
-    flex-wrap: wrap;
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
-  .plan-stat-value {
-    font-size: 30px;
-  }
-
-  .plan-actions {
-    margin-top: 24px;
-    padding-top: 18px;
+  .plan-theme {
+    font-size: clamp(24px, 7vw, 32px);
   }
 
   .plan-action {
     font-size: 13px;
-    line-height: 1.45;
   }
 }
