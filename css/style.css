@@ -744,7 +744,15 @@ button { font: inherit; }
   background: var(--green);
 }
 
-.plan-table-wrap { margin-top: 24px; overflow-x: auto; }
+.plan-table-wrap {
+  margin-top: 24px;
+  width: 100%;
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
 .plan-table {
   width: 100%;
   max-width: 880px;
