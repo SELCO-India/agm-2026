@@ -758,6 +758,7 @@ button { font: inherit; }
   max-width: 880px;
   border-collapse: collapse;
   font-size: 13px;
+  margin: 0 auto;
 }
 .plan-table th, .plan-table td {
   padding: 10px 14px;
