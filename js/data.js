@@ -328,5 +328,5 @@ const fy2627SalesPlan = {
     { month: "Mar-27", salesPlan: "₹11 Cr (€991k / $1.15M)", collectionPlan: "₹8 Cr (€721k / $837k)" },
   ],
   totals: { salesPlan: "₹53 Cr (€4.78M / $5.54M)", collectionPlan: "₹53 Cr (€4.78M / $5.54M)" },
-  narrative: "We’re targeting up to ₹53 Cr (€4.78M / $5.54M) by March 2027, and are confident of delivering at least ₹47+ Cr (€4.24M+ / $4.91M+). Expecting 1.5x Collection respect to 1x sales every month",
+  narrative: "We’re projected and planned for ₹53 Cr+ (€4.78M / $5.54M) by March 2027",
 };
